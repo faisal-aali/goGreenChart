@@ -52,7 +52,7 @@
                 }
             }
         );
-        var Br = "https://api-gogreen-ai.deno.dev"
+        var Br = "https://api.gogreen.ai"
             , Fr = "di3T?IHUjH91mgCKs3IrVe5HYP8ctOOH";
         var qr = "chart";
         var Pr = ["wrapper", "filters-wrapper", "filters-reset-button", "filter-toggle", "filter-content", "filter-summary-label", "geography-filter-wrapper", "region-filter", "local-authority-filter", "fuel-poverty-rate-filter", "energy-efficiency-filter-wrapper", "current-rating-filter", "hot-water-efficiency-filter", "windows-efficiency-filter", "walls-efficiency-filter", "roof-efficiency-filter", "main-heat-efficiency-filter", "lighting-efficiency-filter", "energy-cost-filter-wrapper", "current-consumption-filter", "household-income-filter-wrapper", "tenure-filter", "main-gas-filter", "income-deprivation-domain-filter", "income-deprivation-children-filter", "income-deprivation-elderly-filter", "addresses-count", "toolbar", "chart-toggle", "search", "canvas", "canvas-placeholder", "loader"]
@@ -4671,12 +4671,12 @@
                 let e = ga.filter(n=>t.Regions.includes(n.region_name))
                     , r = t.LocalAuthorityLabels.filter(n=>e.map(a=>a.name).includes(n));
                 return t.LocalAuthorityLabels = r,
-                    (await fetch(`${Br}/addresses/chart`, {
+                    (await fetch(`${Br}/find_address_count`, {
                         method: "POST",
                         headers: {
                             Accept: "application/json",
                             "Content-Type": "application/json",
-                            "Bearer": `${Fr}`
+                            "x-csrf-token": `${Fr}`
                         },
                         body: JSON.stringify(t)
                     })).json()
@@ -4686,7 +4686,7 @@
             completion_status: !0,
             error: !1,
             total_address_count: 23734860,
-            datasets: [{
+            dataset: [{
                 region: "East Midlands",
                 local_authority: "Amber Valley",
                 address_count: 48849,
@@ -6890,9 +6890,6 @@
                             v.reset(),
                                 await H()
                         }
-                    ), q(t.querySelector(A["filters_submit-button"]), "click", async()=>{
-                                await N()
-                        }
                     ), q(_.geography.regionField, "change", async()=>{
                             var w;
                             let p = (w = _.geography.regionField) == null ? void 0 : w.querySelectorAll("input");
@@ -6901,7 +6898,8 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("Regions", y)
                                 }
-                            ),await N()
+                            ),
+                                await N()
                         }
                     ), q(_.geography.localAuthorityField, "change", async()=>{
                             var w;
@@ -6913,7 +6911,7 @@
                                         y.length === 0 ? v.setValue("la_select_status", !1) : v.setValue("la_select_status", !0)
                                 }
                             ),
-                            await N()
+                                await N()
                         }
                     ), q(_.geography.fuelPovertyRateField, "input", (0,
                         It.default)(async()=>{
@@ -6935,7 +6933,8 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("CurrentEnergyRating", y)
                                 }
-                            ),await N()
+                            ),
+                                await N()
                         }
                     ), q(_.energyEfficiency.hotWaterEfficiencyField, "change", async()=>{
                             var w;
@@ -6945,7 +6944,8 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("HotWaterEnergyEfficiency", y)
                                 }
-                            ),await N()
+                            ),
+                                await N()
                         }
                     ), q(_.energyEfficiency.windowsEfficiencyField, "change", async()=>{
                             var w;
@@ -6955,7 +6955,8 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("WindowsEnergyEfficiency", y)
                                 }
-                            ),await N()
+                            ),
+                                await N()
                         }
                     ), q(_.energyEfficiency.wallsEfficiencyField, "change", async()=>{
                             var w;
@@ -6965,7 +6966,8 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("WallsEnergyEfficiency", y)
                                 }
-                            ),await N()
+                            ),
+                                await N()
                         }
                     ), q(_.energyEfficiency.roofEfficiencyField, "change", async()=>{
                             var w;
@@ -6975,7 +6977,8 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("RoofEnergyEfficiency", y)
                                 }
-                            ),await N()
+                            ),
+                                await N()
                         }
                     ), q(_.energyEfficiency.mainHeatEfficiencyField, "change", async()=>{
                             var w;
@@ -6985,7 +6988,8 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("HeatingEnergyEfficiency", y)
                                 }
-                            ),await N()
+                            ),
+                                await N()
                         }
                     ), q(_.energyEfficiency.lightingEfficiencyField, "change", async()=>{
                             var w
@@ -6999,7 +7003,8 @@
                                     , M = (x = p.querySelector('[name="current_heat_consumption_to"]')) == null ? void 0 : x.value;
                                 v.setValue("CurrentEnergyConsumptionLower", Number(y != null ? y : 0)),
                                     v.setValue("CurrentEnergyConsumptionUpper", Number(M != null ? M : 100))
-                            }await N()
+                            }
+                            await N()
                         }
                         , xt, Et, wt)), q(_.householdIncome.tenureField, "change", async()=>{
                             var w;
@@ -7009,7 +7014,8 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("Tenure", y)
                                 }
-                            ),await N()
+                            ),
+                                await N()
                         }
                     ), q(_.householdIncome.mainGasField, "change", async()=>{
                             var w;
@@ -7019,7 +7025,8 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("MainsGasFlag", y)
                                 }
-                            ),await N()
+                            ),
+                                await N()
                         }
                     ), q(_.householdIncome.incomeDeprivationDomainField, "input", (0,
                         It.default)(async()=>{
@@ -7031,7 +7038,8 @@
                                 v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0)),
                                     v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100)),
                                     v.setValue("IncomeDeprivationIndex", "Income Deprivation Domain")
-                            }await N()
+                            }
+                            await N()
                         }
                         , xt, Et, wt)), q(_.householdIncome.incomeDeprivationChildrenDomainField, "input", (0,
                         It.default)(async()=>{
@@ -7043,7 +7051,8 @@
                                 v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0)),
                                     v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100)),
                                     v.setValue("IncomeDeprivationIndex", "Income Deprivation Children Domain")
-                            }await N()
+                            }
+                            await N()
                         }
                         , xt, Et, wt)), q(_.householdIncome.incomeDeprivationElderlyDomainField, "input", (0,
                         It.default)(async()=>{
@@ -7055,7 +7064,8 @@
                                 v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0)),
                                     v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100)),
                                     v.setValue("IncomeDeprivationIndex", "Income Deprivation Elderly Domain")
-                            }await N()
+                            }
+                            await N()
                         }
                         , xt, Et, wt))]
                 }
