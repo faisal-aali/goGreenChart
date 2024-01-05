@@ -127,9 +127,11 @@
         function Rt(t, e) {
             let r, o;
             if (e === void 0)
-                for (let n of t)
+                    if(t && t[Symbol.iterator] === 'function'){
+                            for (let n of t)
                     n != null && (r === void 0 ? n >= n && (r = o = n) : (r > n && (r = n),
                     o < n && (o = n)));
+                    }
             else {
                 let n = -1;
                 for (let a of t)
