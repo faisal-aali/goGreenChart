@@ -6876,6 +6876,11 @@
                         , v = ze()
                         , N = async()=>{
                             E == null || E.show();
+                            // let p = await va.findAddressCount(v.value);
+                           // G(p),
+                            E == null || E.hide()
+                        }, NN = async()=>{
+                            E == null || E.show();
                             let p = await va.findAddressCount(v.value);
                             G(p),
                             E == null || E.hide()
@@ -6887,6 +6892,10 @@
                         }
                     ;
                     return [q(t.querySelector(A["filters-reset-button"]), "click", async()=>{
+                            v.reset(),
+                                await H()
+                        }
+                    ),q(t.querySelector(A["filters_submit-button"]), "click", async()=>{
                             v.reset(),
                                 await H()
                         }
