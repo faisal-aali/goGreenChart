@@ -134,9 +134,11 @@
                     }
             else {
                 let n = -1;
+                    if(t && t[Symbol.iterator] === 'function'){
                 for (let a of t)
                     (a = e(a, ++n, t)) != null && (r === void 0 ? a >= a && (r = o = a) : (r > a && (r = a),
                     o < a && (o = a)))
+                    }
             }
             return [r, o]
         }
