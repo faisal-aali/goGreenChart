@@ -7069,7 +7069,7 @@
                     let {dataset: _, total_address_count: v} = u;
                     B(v),
                     u === u && (r.innerHTML = ""),
-                        b = Array.from(new Set(_.map(T=>T.region))),
+                        b = Array.from(new Set(_?.map(T=>T.region))),
                     O == null || O.dataset.set(_),
                         (()=>{
                                 var yt;
