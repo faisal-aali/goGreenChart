@@ -127,18 +127,14 @@
         function Rt(t, e) {
             let r, o;
             if (e === void 0)
-                    if(t && t[Symbol.iterator] === 'function'){
-                            for (let n of t)
+                for (let n of t)
                     n != null && (r === void 0 ? n >= n && (r = o = n) : (r > n && (r = n),
                     o < n && (o = n)));
-                    }
             else {
                 let n = -1;
-                    if(t && t[Symbol.iterator] === 'function'){
                 for (let a of t)
                     (a = e(a, ++n, t)) != null && (r === void 0 ? a >= a && (r = o = a) : (r > a && (r = a),
                     o < a && (o = a)))
-                    }
             }
             return [r, o]
         }
@@ -6904,7 +6900,7 @@
                                     let y = v.value.Regions;
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("Regions", y)
-                                }
+                                }, await N()
                             )
                         }
                     ), q(_.geography.localAuthorityField, "change", async()=>{
@@ -6916,8 +6912,8 @@
                                         v.setValue("LocalAuthorityLabels", y),
                                         y.length === 0 ? v.setValue("la_select_status", !1) : v.setValue("la_select_status", !0)
                                 }
-                            )
-                            //     await N()
+                            ),
+                            await N()
                         }
                     ), q(_.geography.fuelPovertyRateField, "input", (0,
                         It.default)(async()=>{
@@ -6928,7 +6924,8 @@
                                     , M = (x = p.querySelector('[name="fuel_poverty_rate_to"]')) == null ? void 0 : x.value;
                                 v.setValue("FuelPovertyRateLower", Number(y != null ? y : 0)),
                                     v.setValue("FuelPovertyRateUpper", Number(M != null ? M : 100))
-                            }
+                            },
+                            await N()
                         }
                         , xt, Et, wt)), q(_.energyEfficiency.currentRatingField, "change", async()=>{
                             var w;
@@ -6938,7 +6935,7 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("CurrentEnergyRating", y)
                                 }
-                            )
+                            ),await N()
                         }
                     ), q(_.energyEfficiency.hotWaterEfficiencyField, "change", async()=>{
                             var w;
@@ -6948,7 +6945,7 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("HotWaterEnergyEfficiency", y)
                                 }
-                            )
+                            ),await N()
                         }
                     ), q(_.energyEfficiency.windowsEfficiencyField, "change", async()=>{
                             var w;
@@ -6958,7 +6955,7 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("WindowsEnergyEfficiency", y)
                                 }
-                            )
+                            ),await N()
                         }
                     ), q(_.energyEfficiency.wallsEfficiencyField, "change", async()=>{
                             var w;
@@ -6968,7 +6965,7 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("WallsEnergyEfficiency", y)
                                 }
-                            )
+                            ),await N()
                         }
                     ), q(_.energyEfficiency.roofEfficiencyField, "change", async()=>{
                             var w;
@@ -6978,7 +6975,7 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("RoofEnergyEfficiency", y)
                                 }
-                            )
+                            ),await N()
                         }
                     ), q(_.energyEfficiency.mainHeatEfficiencyField, "change", async()=>{
                             var w;
@@ -6988,7 +6985,7 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("HeatingEnergyEfficiency", y)
                                 }
-                            )
+                            ),await N()
                         }
                     ), q(_.energyEfficiency.lightingEfficiencyField, "change", async()=>{
                             var w
@@ -7002,7 +6999,7 @@
                                     , M = (x = p.querySelector('[name="current_heat_consumption_to"]')) == null ? void 0 : x.value;
                                 v.setValue("CurrentEnergyConsumptionLower", Number(y != null ? y : 0)),
                                     v.setValue("CurrentEnergyConsumptionUpper", Number(M != null ? M : 100))
-                            }
+                            },await N()
                         }
                         , xt, Et, wt)), q(_.householdIncome.tenureField, "change", async()=>{
                             var w;
@@ -7022,7 +7019,7 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("MainsGasFlag", y)
                                 }
-                            )
+                            ),await N()
                         }
                     ), q(_.householdIncome.incomeDeprivationDomainField, "input", (0,
                         It.default)(async()=>{
@@ -7034,7 +7031,7 @@
                                 v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0)),
                                     v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100)),
                                     v.setValue("IncomeDeprivationIndex", "Income Deprivation Domain")
-                            }
+                            },await N()
                         }
                         , xt, Et, wt)), q(_.householdIncome.incomeDeprivationChildrenDomainField, "input", (0,
                         It.default)(async()=>{
@@ -7046,7 +7043,7 @@
                                 v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0)),
                                     v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100)),
                                     v.setValue("IncomeDeprivationIndex", "Income Deprivation Children Domain")
-                            }
+                            },await N()
                         }
                         , xt, Et, wt)), q(_.householdIncome.incomeDeprivationElderlyDomainField, "input", (0,
                         It.default)(async()=>{
@@ -7058,7 +7055,7 @@
                                 v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0)),
                                     v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100)),
                                     v.setValue("IncomeDeprivationIndex", "Income Deprivation Elderly Domain")
-                            }
+                            },await N()
                         }
                         , xt, Et, wt))]
                 }
@@ -7073,7 +7070,7 @@
                     let {dataset: _, total_address_count: v} = u;
                     B(v),
                     u === u && (r.innerHTML = ""),
-                        b = Array.from(new Set(_?.map(T=>T.region))),
+                        b = Array.from(new Set(_.map(T=>T.region))),
                     O == null || O.dataset.set(_),
                         (()=>{
                                 var yt;
@@ -7118,7 +7115,7 @@
                         m.attr("width", i),
                         m.attr("height", l),
                         m.selectAll("*").remove();
-                    let H = Ht().domain(Rt(_?.map(T=>+T.local_authority_poverty_rate)).map((T,yt)=>T ? yt === 0 ? T * .7 : T * 1.2 : 0)).range([a.left, i - a.right])
+                    let H = Ht().domain(Rt(_.map(T=>+T.local_authority_poverty_rate)).map((T,yt)=>T ? yt === 0 ? T * .7 : T * 1.2 : 0)).range([a.left, i - a.right])
                         , p = ie().domain(o ? b.length ? b : ["No regions"] : ["All"]).range([l - a.bottom, a.top])
                         , w = Je(H)
                         , x = je(p);
