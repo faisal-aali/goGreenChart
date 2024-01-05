@@ -6900,8 +6900,8 @@
                                     let y = v.value.Regions;
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("Regions", y)
-                                }, await N()
-                            )
+                                }
+                            ),await N()
                         }
                     ), q(_.geography.localAuthorityField, "change", async()=>{
                             var w;
@@ -6924,7 +6924,7 @@
                                     , M = (x = p.querySelector('[name="fuel_poverty_rate_to"]')) == null ? void 0 : x.value;
                                 v.setValue("FuelPovertyRateLower", Number(y != null ? y : 0)),
                                     v.setValue("FuelPovertyRateUpper", Number(M != null ? M : 100))
-                            },
+                            }
                             await N()
                         }
                         , xt, Et, wt)), q(_.energyEfficiency.currentRatingField, "change", async()=>{
@@ -6999,7 +6999,7 @@
                                     , M = (x = p.querySelector('[name="current_heat_consumption_to"]')) == null ? void 0 : x.value;
                                 v.setValue("CurrentEnergyConsumptionLower", Number(y != null ? y : 0)),
                                     v.setValue("CurrentEnergyConsumptionUpper", Number(M != null ? M : 100))
-                            },await N()
+                            }await N()
                         }
                         , xt, Et, wt)), q(_.householdIncome.tenureField, "change", async()=>{
                             var w;
@@ -7009,7 +7009,7 @@
                                     x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
                                         v.setValue("Tenure", y)
                                 }
-                            )
+                            ),await N()
                         }
                     ), q(_.householdIncome.mainGasField, "change", async()=>{
                             var w;
@@ -7031,7 +7031,7 @@
                                 v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0)),
                                     v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100)),
                                     v.setValue("IncomeDeprivationIndex", "Income Deprivation Domain")
-                            },await N()
+                            }await N()
                         }
                         , xt, Et, wt)), q(_.householdIncome.incomeDeprivationChildrenDomainField, "input", (0,
                         It.default)(async()=>{
@@ -7043,7 +7043,7 @@
                                 v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0)),
                                     v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100)),
                                     v.setValue("IncomeDeprivationIndex", "Income Deprivation Children Domain")
-                            },await N()
+                            }await N()
                         }
                         , xt, Et, wt)), q(_.householdIncome.incomeDeprivationElderlyDomainField, "input", (0,
                         It.default)(async()=>{
@@ -7055,7 +7055,7 @@
                                 v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0)),
                                     v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100)),
                                     v.setValue("IncomeDeprivationIndex", "Income Deprivation Elderly Domain")
-                            },await N()
+                            }await N()
                         }
                         , xt, Et, wt))]
                 }
