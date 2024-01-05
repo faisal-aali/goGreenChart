@@ -6635,6 +6635,11 @@
                 )()
                     , E = (()=>{
                         let g = document.createElement("div");
+                        let span = document.createElement("span");
+                        g.appendChild(span);
+                        g.appendChild(span);
+                        g.appendChild(span);
+                        g.appendChild(span);
                         g.textContent = "Updating data...";
                         let _ = document.createElement("img");
                         _.src = "https://cdn.dribbble.com/users/1787505/screenshots/7300251/media/a351d9e0236c03a539181b95faced9e0.gif",
