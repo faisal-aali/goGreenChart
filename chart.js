@@ -6896,8 +6896,7 @@
                                 await H()
                         }
                     ),q(t.querySelector(A["filters_submit-button"]), "click", async()=>{
-                            v.reset(),
-                                await H()
+                                await NN();
                         }
                     ), q(_.geography.regionField, "change", async()=>{
                             var w;
