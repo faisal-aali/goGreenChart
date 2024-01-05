@@ -7114,7 +7114,7 @@
                         m.attr("width", i),
                         m.attr("height", l),
                         m.selectAll("*").remove();
-                    let H = Ht().domain(Rt(_.map(T=>+T.local_authority_poverty_rate)).map((T,yt)=>T ? yt === 0 ? T * .7 : T * 1.2 : 0)).range([a.left, i - a.right])
+                    let H = Ht().domain(Rt(_?.map(T=>+T.local_authority_poverty_rate)).map((T,yt)=>T ? yt === 0 ? T * .7 : T * 1.2 : 0)).range([a.left, i - a.right])
                         , p = ie().domain(o ? b.length ? b : ["No regions"] : ["All"]).range([l - a.bottom, a.top])
                         , w = Je(H)
                         , x = je(p);
