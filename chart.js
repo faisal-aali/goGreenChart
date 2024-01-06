@@ -6635,11 +6635,6 @@
                 )()
                     , E = (()=>{
                         let g = document.createElement("div");
-                        let span = document.createElement("span");
-                        g.appendChild(span);
-                        g.appendChild(span);
-                        g.appendChild(span);
-                        g.appendChild(span);
                         g.textContent = "Updating data...";
                         let _ = document.createElement("img");
                         _.src = "https://cdn.dribbble.com/users/1787505/screenshots/7300251/media/a351d9e0236c03a539181b95faced9e0.gif",
@@ -6647,8 +6642,15 @@
                             _.style.marginRight = "0.5rem",
                             _.style.backgroundColor = "white",
                             _.style.borderRadius = "100%";
+                        let aa = document.createElement("div");
+                        let span = document.createElement("span");
+                        aa.appendChild(span);
+                        aa.appendChild(span);
+                        aa.appendChild(span);
+                        aa.appendChild(span);
                         let v = document.createElement("div");
                         return v.setAttribute("data-chart-element", "loader"),
+                            v.setAttribute("class", "animation-spinner"),
                             v.style.backgroundColor = "#3CA91E",
                             v.style.color = "white",
                             v.style.paddingTop = "0.50rem",
@@ -6662,6 +6664,7 @@
                             v.style.top = "80px",
                             v.style.right = "10px",
                             // v.appendChild(_),
+                            v.appendChild(aa);
                             v.appendChild(g),
                             t.style.position = "relative",
                         t == null || t.appendChild(v),
