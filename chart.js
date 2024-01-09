@@ -55,7 +55,7 @@
         var Br = "https://659c81b2633f9aee7907ae3f.mockapi.io/addresses"
             , Fr = "di3T?IHUjH91mgCKs3IrVe5HYP8ctOOH";
         var qr = "chart";
-        var Pr = ["wrapper", "filters-wrapper", "filters-reset-button", "filter-toggle", "filter-content", "filter-summary-label", "geography-filter-wrapper", "region-filter", "local-authority-filter", "fuel-poverty-rate-filter", "energy-efficiency-filter-wrapper", "current-rating-filter", "hot-water-efficiency-filter", "windows-efficiency-filter", "walls-efficiency-filter", "roof-efficiency-filter", "main-heat-efficiency-filter", "lighting-efficiency-filter", "energy-cost-filter-wrapper", "current-consumption-filter", "household-income-filter-wrapper", "tenure-filter", "main-gas-filter", "income-deprivation-domain-filter", "income-deprivation-children-filter", "income-deprivation-elderly-filter", "addresses-count", "toolbar", "chart-toggle", "search", "canvas", "canvas-placeholder", "loader"]
+        var Pr = ["wrapper", "filters-wrapper","filters-submit-button", "filters-reset-button", "filter-toggle", "filter-content", "filter-summary-label", "geography-filter-wrapper", "region-filter", "local-authority-filter", "fuel-poverty-rate-filter", "energy-efficiency-filter-wrapper", "current-rating-filter", "hot-water-efficiency-filter", "windows-efficiency-filter", "walls-efficiency-filter", "roof-efficiency-filter", "main-heat-efficiency-filter", "lighting-efficiency-filter", "energy-cost-filter-wrapper", "current-consumption-filter", "household-income-filter-wrapper", "tenure-filter", "main-gas-filter", "income-deprivation-domain-filter", "income-deprivation-children-filter", "income-deprivation-elderly-filter", "addresses-count", "toolbar", "chart-toggle", "search", "canvas", "canvas-placeholder", "loader"]
             , xt = 2e3
             , Et = !1
             , wt = !0;
@@ -6905,10 +6905,9 @@
                             v.reset(),
                                 await H()
                         }
-                    ),q(t.querySelector(".filters_submit-button"), "click", async()=>{
-                            await NN();
-                        }
-                    ), q(_.geography.regionField, "change", async()=>{
+                    ),q(t.querySelector(A["filters-submit-button"]), "click", async()=>{
+                        await NN();
+                    }), q(_.geography.regionField, "change", async()=>{
                             var w;
                             let p = (w = _.geography.regionField) == null ? void 0 : w.querySelectorAll("input");
                             p == null || p.forEach(x=>{
