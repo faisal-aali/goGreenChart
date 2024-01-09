@@ -6880,6 +6880,8 @@
                 )();
                 setTimeout(()=>{
                         F()
+                        console.log(document.querySelector('.filters_submit-button'));
+                        debugger;
                         document.querySelector('.filters_submit-button').click();
                     }
                     , 5e3);
