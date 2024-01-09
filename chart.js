@@ -6995,7 +6995,7 @@
                         )
                         // set householdIncome mainGasField
                         let p12 = (w = _.householdIncome.mainGasField) == null ? void 0 : w.querySelectorAll("input");
-                        p12 == null || p.forEach(x=>{
+                        p12 == null || p12.forEach(x=>{
                                 let y = v.value.MainsGasFlag;
                                 x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
                                 v.setValue("MainsGasFlag", y)
