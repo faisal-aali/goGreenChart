@@ -6880,8 +6880,7 @@
                 )();
                 setTimeout(()=>{
                         F()
-                        console.log(document.querySelector('.filters_submit-button'));
-                        debugger;
+                        console.log("Chart file loaded: calling API's now");
                         document.querySelector('.filters_submit-button').click();
                     }
                     , 5e3);
