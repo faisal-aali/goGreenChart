@@ -6769,9 +6769,9 @@
                     let w = f.querySelector("#address-count");
                     w && (w.textContent = _.address_count.toLocaleString().replace(",", " ") || "");
                     let x = f.querySelector("#local-authority-fuel-poverty-rate");
-                    x && (x.textContent = parseFloat(_.local_authority_poverty_rate.toFixed(2)) + "%" || "");
+                    x && (x.textContent = parseFloat(_.local_authority_poverty_rate).toFixed(2) + "%" || "");
                     let y = f.querySelector("#regional-fuel-poverty-rate");
-                    y && (y.textContent = parseFloat(_.regional_poverty_rate.toFixed(2)) + "%" || ""),
+                    y && (y.textContent = parseFloat(_.regional_poverty_rate).toFixed(2) + "%" || ""),
                         f.style.left = v + "px",
                         f.style.top = N + 10 + "px",
                         f.style.opacity = "1"
