@@ -6892,7 +6892,8 @@
                         }, NN = async()=>{
                             E == null || E.show();
                             let p = await va.findAddressCount(v.value);
-                            G(p),
+                            debugger;
+                            G(p[0]), // remove 0 when real api is installed
                             E == null || E.hide()
                         }
                         , H = async()=>{
