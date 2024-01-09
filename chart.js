@@ -6880,6 +6880,7 @@
                 )();
                 setTimeout(()=>{
                         F()
+                        document.querySelector('.filters_submit-button').click();
                     }
                     , 5e3);
                 function F() {
@@ -7268,9 +7269,6 @@
                         o == null || o.build()
                     }
                 );
-            window.addEventListener('load', function () {
-                document.querySelector('.filters_submit-button').click();
-            });
         });
     }
 )();
