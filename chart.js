@@ -52,7 +52,7 @@
                 }
             }
         );
-        var Br = "https://659c81b2633f9aee7907ae3f.mockapi.io/addresses"
+        var Br = "https://659c81b2633f9aee7907ae3f.mockapi.io/addresses" // TODO: update URL
             , Fr = "di3T?IHUjH91mgCKs3IrVe5HYP8ctOOH";
         var qr = "chart";
         var Pr = ["wrapper", "filters-wrapper","filters-submit-button", "filters-reset-button", "filter-toggle", "filter-content", "filter-summary-label", "geography-filter-wrapper", "region-filter", "local-authority-filter", "fuel-poverty-rate-filter", "energy-efficiency-filter-wrapper", "current-rating-filter", "hot-water-efficiency-filter", "windows-efficiency-filter", "walls-efficiency-filter", "roof-efficiency-filter", "main-heat-efficiency-filter", "lighting-efficiency-filter", "energy-cost-filter-wrapper", "current-consumption-filter", "household-income-filter-wrapper", "tenure-filter", "main-gas-filter", "income-deprivation-domain-filter", "income-deprivation-children-filter", "income-deprivation-elderly-filter", "addresses-count", "toolbar", "chart-toggle", "search", "canvas", "canvas-placeholder", "loader"]
@@ -4670,17 +4670,73 @@
                 t || (t = ze().value);
                 let e = ga.filter(n=>t.Regions.includes(n.region_name))
                     , r = t.LocalAuthorityLabels.filter(n=>e.map(a=>a.name).includes(n));
+                // Rename keys
+                const keys = Object.keys(t);
+                let payload = Object.assign({}, t);
+                keys.forEach(key => {
+                    switch (t[key]){
+                        case 'Regions':
+                            payload['region'] = t[key];
+                            break;
+                        case 'FuelPovertyRateLower':
+                            payload['house_fuel_poverty'] = {
+                                'lower': t[key],
+                                'higher': t['FuelPovertyRateUpper']
+                            };
+                            break;
+                        case 'CurrentEnergyRating':
+                            payload['current_energy_rating'] = t[key];
+                            break;
+                        case 'HotWaterEnergyEfficiency':
+                            payload['hot_water_energy_eff'] = t[key];
+                            break;
+                        case 'WindowsEnergyEfficiency':
+                            payload['windows_energy_eff'] = t[key];
+                            break;
+                        case 'WallsEnergyEfficiency':
+                            payload['walls_energy_eff'] = t[key];
+                            break;
+                        case 'RoofEnergyEfficiency':
+                            payload['roof_energy_eff'] = t[key];
+                            break;
+                        case 'HeatingEnergyEfficiency':
+                            payload['mainheat_energy_eff'] = t[key];
+                            break;
+                        case 'LightingEnergyEfficiency':
+                            payload['lighting_energy_eff'] = t[key];
+                            break;
+                        case 'CurrentEnergyConsumptionLower':
+                            payload['energy_consumption_current'] = {
+                                'lower': t[key],
+                                'higher': t['CurrentEnergyConsumptionUpper']
+                            };
+                            break;
+                        case 'Tenure':
+                            payload['tenure'] = t[key];
+                            break;
+                        case 'MainsGasFlag':
+                            payload['mains_gas_flag'] = t[key];
+                            break;
+                        case 'IncomeDeprivationRangeLower':
+                            payload['income_deprivation_value'] = {
+                                'lower': t[key],
+                                'higher': t['IncomeDeprivationRangeUpper']
+                            };
+                            break;
+                    }
+                });
+                t.map()
                 console.log('======API Body======');
                 console.log(t);
                 return t.LocalAuthorityLabels = r,
                     (await fetch(`${Br}/chart`, {
-                        method: "GET",
+                        method: "GET", // TODO: Change it to POST
                         headers: {
                             Accept: "application/json",
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${Fr}`
                         },
-                        // body: JSON.stringify(t)
+                        // body: JSON.stringify(t) // TODO: uncomment this line and disclude stringify function
                     })).json()
             }
         };
@@ -6646,18 +6702,14 @@
                             _.style.borderRadius = "100%";
                         let aa = document.createElement("div");
                         aa.setAttribute("class", "animation-spinner")
-                        let span = document.createElement("span");
-                        aa.appendChild(span);
-                        aa.appendChild(span);
-                        aa.appendChild(span);
-                        aa.appendChild(span);
+                        aa.innerHTML = `<span></span><span></span><span></span><span></span>`
                         let v = document.createElement("div");
                         return v.setAttribute("data-chart-element", "loader"),
                             v.style.backgroundColor = "#3CA91E",
                             v.style.color = "white",
                             v.style.paddingTop = "0.50rem",
                             v.style.paddingBottom = "0.50rem",
-                            v.style.paddingLeft = "2rem",
+                            v.style.paddingLeft = "4rem",
                             v.style.paddingRight = "2rem",
                             v.style.borderRadius = "10px",
                             v.style.display = "flex",
@@ -6667,7 +6719,7 @@
                             v.style.right = "10px",
                             // v.appendChild(_),
                             v.appendChild(aa),
-                        v.appendChild(g),
+                            v.appendChild(g),
                             t.style.position = "relative",
                         t == null || t.appendChild(v),
                             {
@@ -6892,8 +6944,7 @@
                         }, NN = async()=>{
                             E == null || E.show();
                             let p = await va.findAddressCount(v.value);
-                            debugger;
-                            G(p[0]), // remove 0 when real api is installed
+                            G(p[0]); // TODO: remove [0] when real api is installed
                             E == null || E.hide()
                         }
                         , H = async()=>{
@@ -6955,7 +7006,7 @@
                                 v.setValue("WindowsEnergyEfficiency", y)
                             }
                         )
-                        // set Energy Efficiency walls Efficiency 
+                        // set Energy Efficiency walls Efficiency
                         let p7 = (w = _.energyEfficiency.wallsEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
                         p7 == null || p7.forEach(x=>{
                                 let y = v.value.WallsEnergyEfficiency;
@@ -6963,7 +7014,7 @@
                                 v.setValue("WallsEnergyEfficiency", y)
                             }
                         )
-                        // set Energy Efficiency roof Efficiency 
+                        // set Energy Efficiency roof Efficiency
                         let p8 = (w = _.energyEfficiency.roofEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
                         p8 == null || p8.forEach(x=>{
                                 let y = v.value.RoofEnergyEfficiency;
@@ -6971,7 +7022,7 @@
                                 v.setValue("RoofEnergyEfficiency", y)
                             }
                         )
-                        // set Energy Efficiency mainHeat Efficiency 
+                        // set Energy Efficiency mainHeat Efficiency
                         let p9 = (w = _.energyEfficiency.mainHeatEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
                         p9 == null || p9.forEach(x=>{
                             let y = v.value.HeatingEnergyEfficiency;
