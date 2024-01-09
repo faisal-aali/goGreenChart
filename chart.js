@@ -6666,7 +6666,7 @@
                             v.style.top = "80px",
                             v.style.right = "10px",
                             // v.appendChild(_),
-                            v.appendChild(aa);
+                            v.appendChild(aa),
                         v.appendChild(g),
                             t.style.position = "relative",
                         t == null || t.appendChild(v),
