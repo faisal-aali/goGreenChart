@@ -52,7 +52,7 @@
                 }
             }
         );
-        var Br = "https://api.gogreen.ai"
+        var Br = "https://659c81b2633f9aee7907ae3f.mockapi.io/addresses"
             , Fr = "di3T?IHUjH91mgCKs3IrVe5HYP8ctOOH";
         var qr = "chart";
         var Pr = ["wrapper", "filters-wrapper", "filters-reset-button", "filter-toggle", "filter-content", "filter-summary-label", "geography-filter-wrapper", "region-filter", "local-authority-filter", "fuel-poverty-rate-filter", "energy-efficiency-filter-wrapper", "current-rating-filter", "hot-water-efficiency-filter", "windows-efficiency-filter", "walls-efficiency-filter", "roof-efficiency-filter", "main-heat-efficiency-filter", "lighting-efficiency-filter", "energy-cost-filter-wrapper", "current-consumption-filter", "household-income-filter-wrapper", "tenure-filter", "main-gas-filter", "income-deprivation-domain-filter", "income-deprivation-children-filter", "income-deprivation-elderly-filter", "addresses-count", "toolbar", "chart-toggle", "search", "canvas", "canvas-placeholder", "loader"]
@@ -4670,15 +4670,17 @@
                 t || (t = ze().value);
                 let e = ga.filter(n=>t.Regions.includes(n.region_name))
                     , r = t.LocalAuthorityLabels.filter(n=>e.map(a=>a.name).includes(n));
+                console.log('======API Body======');
+                console.log(t);
                 return t.LocalAuthorityLabels = r,
-                    (await fetch(`${Br}/find_address_count`, {
-                        method: "POST",
+                    (await fetch(`${Br}/chart`, {
+                        method: "GET",
                         headers: {
                             Accept: "application/json",
                             "Content-Type": "application/json",
-                            "x-csrf-token": `${Fr}`
+                            "Authorization": `Bearer ${Fr}`
                         },
-                        body: JSON.stringify(t)
+                        // body: JSON.stringify(t)
                     })).json()
             }
         };
@@ -4686,7 +4688,7 @@
             completion_status: !0,
             error: !1,
             total_address_count: 23734860,
-            dataset: [{
+            datasets: [{
                 region: "East Midlands",
                 local_authority: "Amber Valley",
                 address_count: 48849,
@@ -6665,7 +6667,7 @@
                             v.style.right = "10px",
                             // v.appendChild(_),
                             v.appendChild(aa);
-                            v.appendChild(g),
+                        v.appendChild(g),
                             t.style.position = "relative",
                         t == null || t.appendChild(v),
                             {
@@ -6733,7 +6735,7 @@
                 }
                 let O = (()=>{
                         var p;
-                        let {dataset: g} = u
+                        let {datasets: g} = u
                             , _ = []
                             , v = t.querySelector('[data-chart-element="search"]')
                             , N = document.createElement("div");
@@ -6813,7 +6815,7 @@
                             N.appendChild(H),
                             v.appendChild(N),
                             {
-                                dataset: {
+                                datasets: {
                                     value: g,
                                     set: w=>{
                                         g = w
@@ -6885,7 +6887,7 @@
                         , N = async()=>{
                             E == null || E.show();
                             // let p = await va.findAddressCount(v.value);
-                           // G(p),
+                            // G(p),
                             E == null || E.hide()
                         }, NN = async()=>{
                             E == null || E.show();
@@ -6904,7 +6906,7 @@
                                 await H()
                         }
                     ),q(t.querySelector(".filters_submit-button"), "click", async()=>{
-                                await NN();
+                            await NN();
                         }
                     ), q(_.geography.regionField, "change", async()=>{
                             var w;
@@ -7093,11 +7095,11 @@
                     if (u = g,
                         u.error)
                         return;
-                    let {dataset: _, total_address_count: v} = u;
+                    let {datasets: _, total_address_count: v} = u;
                     B(v),
                     u === u && (r.innerHTML = ""),
                         b = Array.from(new Set(_.map(T=>T.region))),
-                    O == null || O.dataset.set(_),
+                    O == null || O.datasets.set(_),
                         (()=>{
                                 var yt;
                                 let T = document.createElement("div");
@@ -7180,7 +7182,7 @@
                             I(u)
                     }
                     , B = g=>{
-                        let _ = t.querySelector(A["addresses-count"]);
+                        let _ = t.querySelector(A["addresses-count-dummy"]);
                         !_ || !g || (_.textContent = `${g.toLocaleString().replace(/,/g, " ")}`)
                     }
                     , k = g=>{
