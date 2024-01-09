@@ -52,7 +52,7 @@
                 }
             }
         );
-        var Br = "https://659c81b2633f9aee7907ae3f.mockapi.io/addresses" // TODO: update URL
+        var Br = "https://api-gogreen-ai.deno.dev/addresses"
             , Fr = "di3T?IHUjH91mgCKs3IrVe5HYP8ctOOH";
         var qr = "chart";
         var Pr = ["wrapper", "filters-wrapper","filters-submit-button", "filters-reset-button", "filter-toggle", "filter-content", "filter-summary-label", "geography-filter-wrapper", "region-filter", "local-authority-filter", "fuel-poverty-rate-filter", "energy-efficiency-filter-wrapper", "current-rating-filter", "hot-water-efficiency-filter", "windows-efficiency-filter", "walls-efficiency-filter", "roof-efficiency-filter", "main-heat-efficiency-filter", "lighting-efficiency-filter", "energy-cost-filter-wrapper", "current-consumption-filter", "household-income-filter-wrapper", "tenure-filter", "main-gas-filter", "income-deprivation-domain-filter", "income-deprivation-children-filter", "income-deprivation-elderly-filter", "addresses-count", "toolbar", "chart-toggle", "search", "canvas", "canvas-placeholder", "loader"]
@@ -4725,18 +4725,17 @@
                             break;
                     }
                 });
-                t.map()
-                console.log('======API Body======');
+                console.log('====== CHART API PAYLOAD======');
                 console.log(t);
                 return t.LocalAuthorityLabels = r,
                     (await fetch(`${Br}/chart`, {
-                        method: "GET", // TODO: Change it to POST
+                        method: "POST",
                         headers: {
                             Accept: "application/json",
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${Fr}`
                         },
-                        // body: JSON.stringify(t) // TODO: uncomment this line and disclude stringify function
+                        body: t
                     })).json()
             }
         };
@@ -6944,7 +6943,7 @@
                         }, NN = async()=>{
                             E == null || E.show();
                             let p = await va.findAddressCount(v.value);
-                            G(p[0]); // TODO: remove [0] when real api is installed
+                            G(p);
                             E == null || E.hide()
                         }
                         , H = async()=>{
@@ -7268,8 +7267,10 @@
                         let o = xa(e, r);
                         o == null || o.build()
                     }
-                )
-            }
-        );
+                );
+            window.addEventListener('load', function () {
+                document.querySelector('.filters_submit-button').click();
+            });
+        });
     }
 )();
