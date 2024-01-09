@@ -4735,7 +4735,7 @@
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${Fr}`
                         },
-                        body: t
+                        body: JSON.stringify(t)
                     })).json()
             }
         };
