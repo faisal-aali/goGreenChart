@@ -6645,6 +6645,7 @@
                             _.style.backgroundColor = "white",
                             _.style.borderRadius = "100%";
                         let aa = document.createElement("div");
+                        aa.setAttribute("class", "animation-spinner")
                         let span = document.createElement("span");
                         aa.appendChild(span);
                         aa.appendChild(span);
@@ -6652,7 +6653,6 @@
                         aa.appendChild(span);
                         let v = document.createElement("div");
                         return v.setAttribute("data-chart-element", "loader"),
-                            v.setAttribute("class", "animation-spinner"),
                             v.style.backgroundColor = "#3CA91E",
                             v.style.color = "white",
                             v.style.paddingTop = "0.50rem",
@@ -6906,183 +6906,195 @@
                                 await H()
                         }
                     ),q(t.querySelector(A["filters-submit-button"]), "click", async()=>{
+                        // Set Region
+                        var w, x;
+                        let p1 = (w = _.geography.regionField) == null ? void 0 : w.querySelectorAll("input");
+                        p1 == null || p1.forEach(x=>{
+                            let y = v.value.Regions;
+                            x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
+                            v.setValue("Regions", y)
+                        });
+                        // Set Authorities
+                        let p2 = (w = _.geography.localAuthorityField) == null ? void 0 : w.querySelectorAll("input");
+                        p2 == null || p2.forEach(x=>{
+                            let y = v.value.LocalAuthorityLabels;
+                            x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
+                            v.setValue("LocalAuthorityLabels", y);
+                            y.length === 0 ? v.setValue("la_select_status", !1) : v.setValue("la_select_status", !0)
+                        });
+                        // Set Poverty Rate
+                        let {fuelPovertyRateField: p3} = _.geography;
+                        if (p3) {
+                            let y = (w = p3.querySelector('[name="fuel_poverty_rate_from"]')) == null ? void 0 : w.value
+                                , M = (x = p3.querySelector('[name="fuel_poverty_rate_to"]')) == null ? void 0 : x.value;
+                            v.setValue("FuelPovertyRateLower", Number(y != null ? y : 0));
+                            v.setValue("FuelPovertyRateUpper", Number(M != null ? M : 100))
+                        }
+                        // set Energy Efficiency current Rating
+                        let p4 = (w = _.energyEfficiency.currentRatingField) == null ? void 0 : w.querySelectorAll("input");
+                        p4 == null || p4.forEach(x=>{
+                                let y = v.value.CurrentEnergyRating;
+                                x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
+                                v.setValue("CurrentEnergyRating", y)
+                            }
+                        )
+                        // set Energy Efficiency Hot Water Efficiency
+                        let p5 = (w = _.energyEfficiency.hotWaterEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
+                        p5 == null || p5.forEach(x=>{
+                                let y = v.value.HotWaterEnergyEfficiency;
+                                x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
+                                v.setValue("HotWaterEnergyEfficiency", y)
+                            }
+                        )
+                        // set Energy Efficiency windows Efficiency
+                        let p6 = (w = _.energyEfficiency.windowsEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
+                        p6 == null || p6.forEach(x=>{
+                                let y = v.value.WindowsEnergyEfficiency;
+                                x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
+                                v.setValue("WindowsEnergyEfficiency", y)
+                            }
+                        )
+                        // set Energy Efficiency walls Efficiency 
+                        let p7 = (w = _.energyEfficiency.wallsEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
+                        p7 == null || p7.forEach(x=>{
+                                let y = v.value.WallsEnergyEfficiency;
+                                x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
+                                v.setValue("WallsEnergyEfficiency", y)
+                            }
+                        )
+                        // set Energy Efficiency roof Efficiency 
+                        let p8 = (w = _.energyEfficiency.roofEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
+                        p8 == null || p8.forEach(x=>{
+                                let y = v.value.RoofEnergyEfficiency;
+                                x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
+                                v.setValue("RoofEnergyEfficiency", y)
+                            }
+                        )
+                        // set Energy Efficiency mainHeat Efficiency 
+                        let p9 = (w = _.energyEfficiency.mainHeatEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
+                        p9 == null || p9.forEach(x=>{
+                            let y = v.value.HeatingEnergyEfficiency;
+                            x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
+                            v.setValue("HeatingEnergyEfficiency", y)
+                        })
+                        // set Current Consumption
+                        let {currentConsumptionField: p10} = _.energyCost;
+                        if (p10) {
+                            let y = (w = p10.querySelector('[name="current_heat_consumption_from"]')) == null ? void 0 : w.value
+                                , M = (x = p10.querySelector('[name="current_heat_consumption_to"]')) == null ? void 0 : x.value;
+                            v.setValue("CurrentEnergyConsumptionLower", Number(y != null ? y : 0));
+                            v.setValue("CurrentEnergyConsumptionUpper", Number(M != null ? M : 100));
+                        }
+                        // set householdIncome tenureField
+                        let p11 = (w = _.householdIncome.tenureField) == null ? void 0 : w.querySelectorAll("input");
+                        p11 == null || p11.forEach(x=>{
+                                let y = v.value.Tenure;
+                                x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
+                                v.setValue("Tenure", y)
+                            }
+                        )
+                        // set householdIncome mainGasField
+                        let p12 = (w = _.householdIncome.mainGasField) == null ? void 0 : w.querySelectorAll("input");
+                        p12 == null || p.forEach(x=>{
+                                let y = v.value.MainsGasFlag;
+                                x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
+                                v.setValue("MainsGasFlag", y)
+                            }
+                        )
+                        // set householdIncome incomeDeprivationDomain
+                        let {incomeDeprivationDomainField: p13} = _.householdIncome;
+                        if (p13) {
+                            let y = (w = p13.querySelector('[name="income_deprivation_domain_from"]')) == null ? void 0 : w.value
+                                , M = (x = p13.querySelector('[name="income_deprivation_domain_to"]')) == null ? void 0 : x.value;
+                            v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0))
+                            v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100));
+                            v.setValue("IncomeDeprivationIndex", "Income Deprivation Domain");
+                        }
+                        // set householdIncome incomeDeprivationChildrenDomain
+                        let {incomeDeprivationChildrenDomainField: p14} = _.householdIncome;
+                        if (p14) {
+                            let y = (w = p14.querySelector('[name="income_deprivation_domain_from"]')) == null ? void 0 : w.value
+                                , M = (x = p14.querySelector('[name="income_deprivation_domain_to"]')) == null ? void 0 : x.value;
+                            v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0));
+                            v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100));
+                            v.setValue("IncomeDeprivationIndex", "Income Deprivation Children Domain");
+                        }
+                        // set householdIncome incomeDeprivationElderly
+                        let {incomeDeprivationDomainField: p15} = _.householdIncome;
+                        if (p15) {
+                            let y = (w = p15.querySelector('[name="income_deprivation_domain_from"]')) == null ? void 0 : w.value
+                                , M = (x = p15.querySelector('[name="income_deprivation_domain_to"]')) == null ? void 0 : x.value;
+                            v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0));
+                            v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100));
+                            v.setValue("IncomeDeprivationIndex", "Income Deprivation Elderly Domain");
+                        }
                         await NN();
                     }), q(_.geography.regionField, "change", async()=>{
-                            var w;
-                            let p = (w = _.geography.regionField) == null ? void 0 : w.querySelectorAll("input");
-                            p == null || p.forEach(x=>{
-                                    let y = v.value.Regions;
-                                    x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
-                                        v.setValue("Regions", y)
-                                }
-                            ),
-                                await N()
+                            //await N()
                         }
                     ), q(_.geography.localAuthorityField, "change", async()=>{
-                            var w;
-                            let p = (w = _.geography.localAuthorityField) == null ? void 0 : w.querySelectorAll("input");
-                            p == null || p.forEach(x=>{
-                                    let y = v.value.LocalAuthorityLabels;
-                                    x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
-                                        v.setValue("LocalAuthorityLabels", y),
-                                        y.length === 0 ? v.setValue("la_select_status", !1) : v.setValue("la_select_status", !0)
-                                }
-                            ),
-                                await N()
+                            // var w;
+                            // await N()
                         }
                     ), q(_.geography.fuelPovertyRateField, "input", (0,
                         It.default)(async()=>{
-                            var w, x;
-                            let {fuelPovertyRateField: p} = _.geography;
-                            if (p) {
-                                let y = (w = p.querySelector('[name="fuel_poverty_rate_from"]')) == null ? void 0 : w.value
-                                    , M = (x = p.querySelector('[name="fuel_poverty_rate_to"]')) == null ? void 0 : x.value;
-                                v.setValue("FuelPovertyRateLower", Number(y != null ? y : 0)),
-                                    v.setValue("FuelPovertyRateUpper", Number(M != null ? M : 100))
-                            }
-                            await N()
+                            //var w, x;
+                            // await N()
                         }
                         , xt, Et, wt)), q(_.energyEfficiency.currentRatingField, "change", async()=>{
-                            var w;
-                            let p = (w = _.energyEfficiency.currentRatingField) == null ? void 0 : w.querySelectorAll("input");
-                            p == null || p.forEach(x=>{
-                                    let y = v.value.CurrentEnergyRating;
-                                    x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
-                                        v.setValue("CurrentEnergyRating", y)
-                                }
-                            ),
-                                await N()
+                            // var w;
+                            // await N()
                         }
                     ), q(_.energyEfficiency.hotWaterEfficiencyField, "change", async()=>{
-                            var w;
-                            let p = (w = _.energyEfficiency.hotWaterEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
-                            p == null || p.forEach(x=>{
-                                    let y = v.value.HotWaterEnergyEfficiency;
-                                    x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
-                                        v.setValue("HotWaterEnergyEfficiency", y)
-                                }
-                            ),
-                                await N()
+                            // var w;
+                            // await N()
                         }
                     ), q(_.energyEfficiency.windowsEfficiencyField, "change", async()=>{
-                            var w;
-                            let p = (w = _.energyEfficiency.windowsEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
-                            p == null || p.forEach(x=>{
-                                    let y = v.value.WindowsEnergyEfficiency;
-                                    x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
-                                        v.setValue("WindowsEnergyEfficiency", y)
-                                }
-                            ),
-                                await N()
+                            // var w;
+                            // await N()
                         }
                     ), q(_.energyEfficiency.wallsEfficiencyField, "change", async()=>{
-                            var w;
-                            let p = (w = _.energyEfficiency.wallsEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
-                            p == null || p.forEach(x=>{
-                                    let y = v.value.WallsEnergyEfficiency;
-                                    x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
-                                        v.setValue("WallsEnergyEfficiency", y)
-                                }
-                            ),
-                                await N()
+                            // var w;
+                            // await N()
                         }
                     ), q(_.energyEfficiency.roofEfficiencyField, "change", async()=>{
-                            var w;
-                            let p = (w = _.energyEfficiency.roofEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
-                            p == null || p.forEach(x=>{
-                                    let y = v.value.RoofEnergyEfficiency;
-                                    x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
-                                        v.setValue("RoofEnergyEfficiency", y)
-                                }
-                            ),
-                                await N()
+                            // var w;
+                            // await N()
                         }
                     ), q(_.energyEfficiency.mainHeatEfficiencyField, "change", async()=>{
-                            var w;
-                            let p = (w = _.energyEfficiency.mainHeatEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
-                            p == null || p.forEach(x=>{
-                                    let y = v.value.HeatingEnergyEfficiency;
-                                    x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
-                                        v.setValue("HeatingEnergyEfficiency", y)
-                                }
-                            ),
-                                await N()
+                            // var w;
+                            // await N()
                         }
                     ), q(_.energyEfficiency.lightingEfficiencyField, "change", async()=>{
-                            var w
+                            //var w;
                         }
                     ), q(_.energyCost.currentConsumptionField, "input", (0,
                         It.default)(async()=>{
-                            var w, x;
-                            let {currentConsumptionField: p} = _.energyCost;
-                            if (p) {
-                                let y = (w = p.querySelector('[name="current_heat_consumption_from"]')) == null ? void 0 : w.value
-                                    , M = (x = p.querySelector('[name="current_heat_consumption_to"]')) == null ? void 0 : x.value;
-                                v.setValue("CurrentEnergyConsumptionLower", Number(y != null ? y : 0)),
-                                    v.setValue("CurrentEnergyConsumptionUpper", Number(M != null ? M : 100))
-                            }
-                            await N()
+                            // var w, x;
+                            // await N()
                         }
                         , xt, Et, wt)), q(_.householdIncome.tenureField, "change", async()=>{
-                            var w;
-                            let p = (w = _.householdIncome.tenureField) == null ? void 0 : w.querySelectorAll("input");
-                            p == null || p.forEach(x=>{
-                                    let y = v.value.Tenure;
-                                    x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
-                                        v.setValue("Tenure", y)
-                                }
-                            ),
-                                await N()
+                            // var w;
+                            // await N()
                         }
                     ), q(_.householdIncome.mainGasField, "change", async()=>{
-                            var w;
-                            let p = (w = _.householdIncome.mainGasField) == null ? void 0 : w.querySelectorAll("input");
-                            p == null || p.forEach(x=>{
-                                    let y = v.value.MainsGasFlag;
-                                    x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value),
-                                        v.setValue("MainsGasFlag", y)
-                                }
-                            ),
-                                await N()
+                            // var w;
+                            // await N()
                         }
                     ), q(_.householdIncome.incomeDeprivationDomainField, "input", (0,
                         It.default)(async()=>{
-                            var w, x;
-                            let {incomeDeprivationDomainField: p} = _.householdIncome;
-                            if (p) {
-                                let y = (w = p.querySelector('[name="income_deprivation_domain_from"]')) == null ? void 0 : w.value
-                                    , M = (x = p.querySelector('[name="income_deprivation_domain_to"]')) == null ? void 0 : x.value;
-                                v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0)),
-                                    v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100)),
-                                    v.setValue("IncomeDeprivationIndex", "Income Deprivation Domain")
-                            }
-                            await N()
+                            // var w, x;
+                            // await N()
                         }
                         , xt, Et, wt)), q(_.householdIncome.incomeDeprivationChildrenDomainField, "input", (0,
                         It.default)(async()=>{
-                            var w, x;
-                            let {incomeDeprivationChildrenDomainField: p} = _.householdIncome;
-                            if (p) {
-                                let y = (w = p.querySelector('[name="income_deprivation_domain_from"]')) == null ? void 0 : w.value
-                                    , M = (x = p.querySelector('[name="income_deprivation_domain_to"]')) == null ? void 0 : x.value;
-                                v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0)),
-                                    v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100)),
-                                    v.setValue("IncomeDeprivationIndex", "Income Deprivation Children Domain")
-                            }
-                            await N()
+                            // var w, x;
+                            // await N()
                         }
                         , xt, Et, wt)), q(_.householdIncome.incomeDeprivationElderlyDomainField, "input", (0,
                         It.default)(async()=>{
-                            var w, x;
-                            let {incomeDeprivationDomainField: p} = _.householdIncome;
-                            if (p) {
-                                let y = (w = p.querySelector('[name="income_deprivation_domain_from"]')) == null ? void 0 : w.value
-                                    , M = (x = p.querySelector('[name="income_deprivation_domain_to"]')) == null ? void 0 : x.value;
-                                v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0)),
-                                    v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100)),
-                                    v.setValue("IncomeDeprivationIndex", "Income Deprivation Elderly Domain")
-                            }
-                            await N()
+                            // var w, x;
+                            // await N()
                         }
                         , xt, Et, wt))]
                 }
