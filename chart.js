@@ -6903,12 +6903,9 @@
                             document.querySelector('.filters_submit-button').click();
                         } else {
                             document.querySelector('.filters_submit-button').click();
-                            q(document.querySelector('a[wized="chart_section_toggle"]'), "click", ()=>{
-                                document.querySelectorAll(A.wrapper).forEach((e,r)=>{
-                                        let o = xa(e, r);
-                                        o == null || o.build()
-                                    }
-                                );
+                            q(document.querySelector('a[wized="chart_section_toggle"]'), "click", (e)=>{
+                                let o = xa(e, r);
+                                o == null || o.build()
                             });
                         }
                     }
