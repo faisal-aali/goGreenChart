@@ -6882,7 +6882,17 @@
                 setTimeout(()=>{
                         F()
                         console.log("Chart file loaded: calling API's now");
-                        document.querySelector('.filters_submit-button').click();
+                        if(window.location.pathname !== '/profile-creation') {
+                            document.querySelector('.filters_submit-button').click();
+                        } else {
+                            q(document.querySelector('a[wized="chart_section_toggle"]'), "click", ()=>{
+                                document.querySelectorAll(A.wrapper).forEach((e,r)=>{
+                                        let o = xa(e, r);
+                                        o == null || o.build()
+                                    }
+                                );
+                            });
+                        }
                     }
                     , 5e3);
                 function F() {
