@@ -4672,7 +4672,7 @@
                     , r = t.LocalAuthorityLabels.filter(n=>e.map(a=>a.name).includes(n));
                 // Rename keys
                 const keys = Object.keys(t);
-                let payload = Object.assign({}, t);
+                let payload = {};
                 keys.forEach(key => {
                     switch (t[key]){
                         case 'Regions':
