@@ -4726,7 +4726,7 @@
                     }
                 });
                 console.log('====== CHART API PAYLOAD======');
-                console.log(t);
+                console.log(payload);
                 return t.LocalAuthorityLabels = r,
                     (await fetch(`${Br}/chart`, {
                         method: "POST",
@@ -4735,7 +4735,7 @@
                             "Content-Type": "application/json",
                             "Authorization": `Bearer ${Fr}`
                         },
-                        body: JSON.stringify(t)
+                        body: JSON.stringify(payload)
                     })).json()
             }
         };
@@ -6716,6 +6716,7 @@
                             v.style.position = "absolute",
                             v.style.top = "80px",
                             v.style.right = "10px",
+                            v.style.zIndex = 10000,
                             // v.appendChild(_),
                             v.appendChild(aa),
                             v.appendChild(g),
