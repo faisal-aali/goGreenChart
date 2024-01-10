@@ -4638,6 +4638,10 @@
                     IncomeDeprivationIndex: "Income Deprivation Domain",
                     IncomeDeprivationRangeLower: 0,
                     IncomeDeprivationRangeUpper: 1,
+                    IncomeDeprivationRangeChildLower: 0,
+                    IncomeDeprivationRangeChildUpper: 1,
+                    IncomeDeprivationRangeElderLower: 0,
+                    IncomeDeprivationRangeElderUpper: 1,
                     HotWaterEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
                     WindowsEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
                     WallsEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
@@ -4673,7 +4677,7 @@
                 // Rename keys
                 const keys = Object.keys(t);
                 let payload = {};
-                    debugger;
+                debugger;
                 keys.forEach(key => {
                     switch (key){
                         case 'Regions':
@@ -4717,6 +4721,18 @@
                             break;
                         case 'MainsGasFlag':
                             payload['mains_gas_flag'] = t[key];
+                            break;
+                        case 'IncomeDeprivationRangeChildLower':
+                            payload['idc_value'] = {
+                                'lower': t[key],
+                                'higher': t['IncomeDeprivationRangeChildUpper']
+                            };
+                            break;
+                        case 'IncomeDeprivationRangeElderLower':
+                            payload['idop_value'] = {
+                                'lower': t[key],
+                                'higher': t['IncomeDeprivationRangeElderUpper']
+                            };
                             break;
                         case 'IncomeDeprivationRangeLower':
                             payload['income_deprivation_value'] = {
@@ -7079,19 +7095,19 @@
                         // set householdIncome incomeDeprivationChildrenDomain
                         let {incomeDeprivationChildrenDomainField: p14} = _.householdIncome;
                         if (p14) {
-                            let y = (w = p14.querySelector('[name="income_deprivation_domain_from"]')) == null ? void 0 : w.value
-                                , M = (x = p14.querySelector('[name="income_deprivation_domain_to"]')) == null ? void 0 : x.value;
-                            v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0));
-                            v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100));
+                            let y = (w = p14.querySelector('[name="income_deprivation_children_from"]')) == null ? void 0 : w.value
+                                , M = (x = p14.querySelector('[name="income_deprivation_children_to"]')) == null ? void 0 : x.value;
+                            v.setValue("IncomeDeprivationRangeChildLower", Number(y != null ? y : 0));
+                            v.setValue("IncomeDeprivationRangeChildUpper", Number(M != null ? M : 100));
                             v.setValue("IncomeDeprivationIndex", "Income Deprivation Children Domain");
                         }
                         // set householdIncome incomeDeprivationElderly
                         let {incomeDeprivationDomainField: p15} = _.householdIncome;
                         if (p15) {
-                            let y = (w = p15.querySelector('[name="income_deprivation_domain_from"]')) == null ? void 0 : w.value
-                                , M = (x = p15.querySelector('[name="income_deprivation_domain_to"]')) == null ? void 0 : x.value;
-                            v.setValue("IncomeDeprivationRangeLower", Number(y != null ? y : 0));
-                            v.setValue("IncomeDeprivationRangeUpper", Number(M != null ? M : 100));
+                            let y = (w = p15.querySelector('[name="income_deprivation_older_from"]')) == null ? void 0 : w.value
+                                , M = (x = p15.querySelector('[name="income_deprivation_older_to"]')) == null ? void 0 : x.value;
+                            v.setValue("IncomeDeprivationRangeElderLower", Number(y != null ? y : 0));
+                            v.setValue("IncomeDeprivationRangeElderUpper", Number(M != null ? M : 100));
                             v.setValue("IncomeDeprivationIndex", "Income Deprivation Elderly Domain");
                         }
                         await NN();
