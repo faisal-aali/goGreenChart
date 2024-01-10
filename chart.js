@@ -4673,6 +4673,7 @@
                 // Rename keys
                 const keys = Object.keys(t);
                 let payload = {};
+                debugger;
                 keys.forEach(key => {
                     switch (t[key]){
                         case 'Regions':
@@ -6885,6 +6886,7 @@
                         if(window.location.pathname !== '/profile-creation') {
                             document.querySelector('.filters_submit-button').click();
                         } else {
+                            document.querySelector('.filters_submit-button').click();
                             q(document.querySelector('a[wized="chart_section_toggle"]'), "click", ()=>{
                                 document.querySelectorAll(A.wrapper).forEach((e,r)=>{
                                         let o = xa(e, r);
