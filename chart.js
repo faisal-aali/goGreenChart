@@ -4713,7 +4713,7 @@
                         case 'CurrentEnergyConsumptionLower':
                             payload['energy_consumption_current'] = {
                                 lower: (Number(t[key]) == 313) ? 312274 : (Number(t[key]) * 1000),
-                                higher: (Number('CurrentEnergyConsumptionUpper') == 313) ? 312274 : (Number(t['CurrentEnergyConsumptionUpper']) * 1000)
+                                higher: (Number(t['CurrentEnergyConsumptionUpper']) == 313) ? 312274 : (Number(t['CurrentEnergyConsumptionUpper']) * 1000)
                             };
                             break;
                         case 'Tenure':
