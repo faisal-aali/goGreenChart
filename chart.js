@@ -4674,7 +4674,7 @@
             async findAddressCount(t) {
                 t || (t = ze().value);
                 let e = ga.filter(n=>t.Regions.includes(n.region_name))
-                    , r = t.LocalAuthorityLabels.filter(n=>e.map(a=>a.name).includes(n));
+                    , r = (t.LocalAuthorityLabels || []).filter(n=>e.map(a=>a.name).includes(n));
                 // Rename keys
                 const keys = Object.keys(t);
                 let payload = {};
@@ -6995,7 +6995,7 @@
                         // Set Authorities
                         let p2 = (w = _.geography.localAuthorityField) == null ? void 0 : w.querySelectorAll("input");
                         p2 == null || p2.forEach(x=>{
-                            let y = v.value.LocalAuthorityLabels;
+                            let y = v.value.LocalAuthorityLabels || [];
                             x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
                             v.setValue("LocalAuthorityLabels", y.length == ga.length ? null : y);
                             y.length == ga.length ? v.setValue("la_select_status", true) : v.setValue("la_select_status", false)
