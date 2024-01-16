@@ -7050,7 +7050,7 @@
                         )
                         // lightening
                         // set Energy Efficiency roof Efficiency
-                        let p18 = (w = _.energyEfficiency.roofEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
+                        let p18 = (w = _.energyEfficiency.lightingEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
                         p18 == null || p18.forEach(x=>{
                                 let y = v.value.LightingEnergyEfficiency;
                                 x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
