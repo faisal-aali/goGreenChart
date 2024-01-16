@@ -7107,7 +7107,7 @@
                             v.setValue("IncomeDeprivationIndex", "Income Deprivation Children Domain");
                         }
                         // set householdIncome incomeDeprivationElderly
-                        let {incomeDeprivationDomainField: p15} = _.householdIncome;
+                        let {incomeDeprivationElderlyDomainField: p15} = _.householdIncome;
                         if (p15) {
                             let y = (w = p15.querySelector('[name="income_deprivation_older_from"]')) == null ? void 0 : w.value
                                 , M = (x = p15.querySelector('[name="income_deprivation_older_to"]')) == null ? void 0 : x.value;
