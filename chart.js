@@ -4646,6 +4646,7 @@
                     WindowsEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
                     WallsEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
                     RoofEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
+                    LightingEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
                     HeatingEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
                     Tenure: ["owner-occupied", "rented(private)", "rented(social)", "", "unknown"],
                     MainsGasFlag: ["Y", "N", ""],
@@ -4711,8 +4712,8 @@
                             break;
                         case 'CurrentEnergyConsumptionLower':
                             payload['energy_consumption_current'] = {
-                                lower: (Number(t[key]) == 313) ? 312274 : ((Number(t[key]) == 0 ? 1 : Number(t[key])) * (Number(t[key]) == 0 ? -10000 :1000)),
-                                higher: (Number('CurrentEnergyConsumptionUpper') == 313) ? 312274 : ((Number(t['CurrentEnergyConsumptionUpper']) == 0 ? 1 : Number(t['CurrentEnergyConsumptionUpper'])) * (Number('CurrentEnergyConsumptionUpper')  == 0 ? -10000 : 1000))
+                                lower: (Number(t[key]) == 313) ? 312274 : (Number(t[key]) * 1000),
+                                higher: (Number('CurrentEnergyConsumptionUpper') == 313) ? 312274 : (Number(t['CurrentEnergyConsumptionUpper']) * 1000)
                             };
                             break;
                         case 'Tenure':
@@ -7045,6 +7046,15 @@
                                 let y = v.value.RoofEnergyEfficiency;
                                 x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
                                 v.setValue("RoofEnergyEfficiency", y)
+                            }
+                        )
+                        // lightening
+                        // set Energy Efficiency roof Efficiency
+                        let p18 = (w = _.energyEfficiency.roofEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
+                        p18 == null || p18.forEach(x=>{
+                                let y = v.value.LightingEnergyEfficiency;
+                                x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
+                                v.setValue("LightingEnergyEfficiency", y)
                             }
                         )
                         // set Energy Efficiency mainHeat Efficiency
