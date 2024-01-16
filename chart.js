@@ -4677,7 +4677,6 @@
                 // Rename keys
                 const keys = Object.keys(t);
                 let payload = {};
-                debugger;
                 keys.forEach(key => {
                     switch (key){
                         case 'Regions':
