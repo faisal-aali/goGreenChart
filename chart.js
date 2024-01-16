@@ -4631,7 +4631,7 @@
                 let t = {
                     Regions: ["North West", "Yorkshire and The Humber", "West Midlands", "London", "East Midlands", "South West", "East of England", "North East", "South East"],
                     la_select_status: !1,
-                    LocalAuthorityLabels: ["string"],
+                    LocalAuthorityLabels: [],
                     CurrentEnergyRating: ["A", "B", "C", "D", "E", "F", "G"],
                     FuelPovertyRateLower: 0,
                     FuelPovertyRateUpper: 100,
@@ -6997,8 +6997,8 @@
                         p2 == null || p2.forEach(x=>{
                             let y = v.value.LocalAuthorityLabels;
                             x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
-                            v.setValue("LocalAuthorityLabels", y);
-                            y.length === 0 ? v.setValue("la_select_status", !1) : v.setValue("la_select_status", !0)
+                            v.setValue("LocalAuthorityLabels", y.length == ga.length ? null : y);
+                            y.length == ga.length ? v.setValue("la_select_status", true) : v.setValue("la_select_status", false)
                         });
                         // Set Poverty Rate
                         let {fuelPovertyRateField: p3} = _.geography;
