@@ -6987,7 +6987,6 @@
                         }
                     ;
                     return [q(t.querySelector(A["filters-reset-button"]), "click", async()=>{
-                        v.reset();
                         debugger;
                         // Set Region
                         var w, x;
@@ -7089,7 +7088,7 @@
                             v.setValue("IncomeDeprivationRangeElderLower", 0);
                             v.setValue("IncomeDeprivationRangeElderUpper", 100);
                             v.setValue("IncomeDeprivationIndex", "Income Deprivation Elderly Domain");
-
+                            v.reset();
                             await H()
                         }
                     ),q(t.querySelector(A["filters-submit-button"]), "click", async()=>{
