@@ -6987,8 +6987,110 @@
                         }
                     ;
                     return [q(t.querySelector(A["filters-reset-button"]), "click", async()=>{
-                            v.reset(),
-                                await H()
+                        v.reset();
+                        debugger;
+                        // Set Region
+                        var w, x;
+                        let p1 = (w = _.geography.regionField) == null ? void 0 : w.querySelectorAll("input");
+                        p1 == null || p1.forEach(x => {
+                            x.checked = true;
+                            let y = v.value.Regions;
+                            y.push(x.value);
+                            v.setValue("Regions", y)
+                        });
+                        // Set Authorities
+                        let p2 = (w = _.geography.localAuthorityField) == null ? void 0 : w.querySelectorAll("input");
+                        p2 == null || p2.forEach((x, idx) => {
+                            x.checked = true;
+                            let y = v.value.LocalAuthorityLabels || [];
+                            y.push(x.value);
+                            v.setValue("LocalAuthorityLabels", (p2.length == y.length && y != 0) ? null : y);
+                            (p2.length == y.length && y != 0) ? v.setValue("la_select_status", true) : v.setValue("la_select_status", false)
+                        });
+                        // Set Poverty Rate
+                        v.setValue("FuelPovertyRateLower", Number(0));
+                        v.setValue("FuelPovertyRateUpper", Number(100))
+
+                        // set Energy Efficiency current Rating
+                        let p4 = (w = _.energyEfficiency.currentRatingField) == null ? void 0 : w.querySelectorAll("input");
+                        p4 == null || p4.forEach(x => {
+                             x.checked = true;
+                             let y = v.value.CurrentEnergyRating;
+                             y.push(x.value);
+                            v.setValue("CurrentEnergyRating", y)
+                        })
+                            // set Energy Efficiency Hot Water Efficiency
+                            let p5 = (w = _.energyEfficiency.hotWaterEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
+                            p5 == null || p5.forEach(x => {
+                                x.checked = true;
+                                let y = v.value.HotWaterEnergyEfficiency;
+                                y.push(x.value);
+                                v.setValue("HotWaterEnergyEfficiency", (y.length == 0 ? null : y))
+                            })
+                            // set Energy Efficiency windows Efficiency
+                            let p6 = (w = _.energyEfficiency.windowsEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
+                            p6 == null || p6.forEach(x => {
+                                x.checked = true;
+                                let y = v.value.WindowsEnergyEfficiency;
+                                y.push(x.value);
+                                v.setValue("WindowsEnergyEfficiency", (y.length == 0 ? null : y))
+                            })
+                            // set Energy Efficiency walls Efficiency
+                            let p7 = (w = _.energyEfficiency.wallsEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
+                            p7 == null || p7.forEach(x=>{
+                                    x.checked = true;
+                                    let y = v.value.WallsEnergyEfficiency;
+                                    y.push(x.value);
+                                    v.setValue("WallsEnergyEfficiency", (y.length == 0 ? null : y))
+                                }
+                            )
+                            // set Energy Efficiency roof Efficiency
+                            let p8 = (w = _.energyEfficiency.roofEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
+                            p8 == null || p8.forEach(x=>{
+                                    x.checked = true;
+                                    let y = v.value.RoofEnergyEfficiency;
+                                    y.push(x.value);
+                                    v.setValue("RoofEnergyEfficiency", (y.length == 0 ? null : y))
+                                }
+                            )
+                            // lightening
+                            // set Energy Efficiency roof Efficiency
+                            let p18 = (w = _.energyEfficiency.lightingEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
+                            p18 == null || p18.forEach(x => {
+                                    x.checked = true;
+                                    let y = v.value.LightingEnergyEfficiency;
+                                    y.push(x.value);
+                                    v.setValue("LightingEnergyEfficiency", (y.length == 0 ? null : y))
+                                }
+                            )
+                            // set Energy Efficiency mainHeat Efficiency
+                            let p9 = (w = _.energyEfficiency.mainHeatEfficiencyField) == null ? void 0 : w.querySelectorAll("input");
+                            p9 == null || p9.forEach(x=>{
+                                x.checked = true;
+                                let y = v.value.HeatingEnergyEfficiency;
+                                y.push(x.value);
+                                v.setValue("HeatingEnergyEfficiency", (y.length == 0 ? null : y))
+                            })
+                            // set Current Consumption
+                            v.setValue("CurrentEnergyConsumptionLower", 0);
+                            v.setValue("CurrentEnergyConsumptionUpper", 100);
+
+                            // set householdIncome incomeDeprivationDomain
+                            v.setValue("IncomeDeprivationRangeLower", 0)
+                            v.setValue("IncomeDeprivationRangeUpper", 100);
+                            v.setValue("IncomeDeprivationIndex", "Income Deprivation Domain");
+
+                            // set householdIncome incomeDeprivationChildrenDomain
+                            v.setValue("IncomeDeprivationRangeChildLower", 0);
+                            v.setValue("IncomeDeprivationRangeChildUpper", 100);
+                            v.setValue("IncomeDeprivationIndex", "Income Deprivation Children Domain");
+
+                            // set householdIncome incomeDeprivationElderly
+                            v.setValue("IncomeDeprivationRangeElderLower", 0);
+                            v.setValue("IncomeDeprivationRangeElderUpper", 100);
+                            v.setValue("IncomeDeprivationIndex", "Income Deprivation Elderly Domain");
+
+                            await H()
                         }
                     ),q(t.querySelector(A["filters-submit-button"]), "click", async()=>{
                         // Set Region
