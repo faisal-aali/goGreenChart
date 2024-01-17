@@ -7001,11 +7001,13 @@
                         });
                         // Set Authorities
                         let p2 = (w = _.geography.localAuthorityField) == null ? void 0 : w.querySelectorAll("input");
+                        let counts = 0;
                         p2 == null || p2.forEach(x=>{
                             let y = v.value.LocalAuthorityLabels || [];
                             x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
-                            v.setValue("LocalAuthorityLabels", y.length == ga.length ? null : y);
-                            y.length == ga.length ? v.setValue("la_select_status", true) : v.setValue("la_select_status", false)
+                            counts = counts + 1;
+                            v.setValue("LocalAuthorityLabels", y.length == counts ? null : y);
+                            y.length == counts ? v.setValue("la_select_status", true) : v.setValue("la_select_status", false)
                         });
                         // Set Poverty Rate
                         let {fuelPovertyRateField: p3} = _.geography;
