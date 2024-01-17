@@ -4688,7 +4688,7 @@
                 keys.forEach(key => {
                     switch (key){
                         case 'Regions':
-                            payload['region'] = t[key];
+                            payload['region'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             break;
                         case 'FuelPovertyRateLower':
                             payload['house_fuel_poverty'] = {
@@ -4697,25 +4697,25 @@
                             };
                             break;
                         case 'CurrentEnergyRating':
-                            payload['current_energy_rating'] = t[key];
+                            payload['current_energy_rating'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             break;
                         case 'HotWaterEnergyEfficiency':
-                            payload['hot_water_energy_eff'] = t[key];
+                            payload['hot_water_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             break;
                         case 'WindowsEnergyEfficiency':
-                            payload['windows_energy_eff'] = t[key];
+                            payload['windows_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             break;
                         case 'WallsEnergyEfficiency':
-                            payload['walls_energy_eff'] = t[key];
+                            payload['walls_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             break;
                         case 'RoofEnergyEfficiency':
-                            payload['roof_energy_eff'] = t[key];
+                            payload['roof_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             break;
                         case 'HeatingEnergyEfficiency':
-                            payload['mainheat_energy_eff'] = t[key];
+                            payload['mainheat_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             break;
                         case 'LightingEnergyEfficiency':
-                            payload['lighting_energy_eff'] = t[key];
+                            payload['lighting_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             break;
                         case 'CurrentEnergyConsumptionLower':
                             payload['energy_consumption_current'] = {
