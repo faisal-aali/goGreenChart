@@ -4679,10 +4679,10 @@
                 const keys = Object.keys(t);
                 let payload = {};
                 if (!t.LocalAuthorityLabels) {
-                  payload['la_select_status'] = true;
+                  payload['la_select_status'] = false;
                   payload['local_authority_label'] = null;
                 } else {
-                  payload['la_select_status'] = false;
+                  payload['la_select_status'] = true;
                   payload['local_authority_label'] = t.LocalAuthorityLabels;
                 }
                 keys.forEach(key => {
@@ -4724,7 +4724,7 @@
                             };
                             break;
                         case 'Tenure':
-                            payload['tenure'] = t[key];
+                            payload['tenure'] = t[key].filter(x => x.toLowerCase() !== 'unknown');
                             break;
                         case 'MainsGasFlag':
                             payload['mains_gas_flag'] = t[key];
@@ -7001,7 +7001,7 @@
                         });
                         // Set Authorities
                         let p2 = (w = _.geography.localAuthorityField) == null ? void 0 : w.querySelectorAll("input");
-                      
+
                         p2 == null || p2.forEach((x, idx) => {
                             let y = v.value.LocalAuthorityLabels || [];
                             x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
