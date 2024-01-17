@@ -7005,7 +7005,9 @@
                         p2 == null || p2.forEach(x=>{
                             let y = v.value.LocalAuthorityLabels || [];
                             x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
-                            counts = counts + 1;
+                            if (x.checked) {
+                              counts = counts + 1;
+                            }                  
                             v.setValue("LocalAuthorityLabels", y.length == counts ? null : y);
                             y.length == counts ? v.setValue("la_select_status", true) : v.setValue("la_select_status", false)
                         });
