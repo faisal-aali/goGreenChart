@@ -4678,6 +4678,13 @@
                 // Rename keys
                 const keys = Object.keys(t);
                 let payload = {};
+                if (!t.LocalAuthorityLabels) {
+                  payload['la_select_status'] = true;
+                  payload['local_authority_label'] = null;
+                } else {
+                  payload['la_select_status'] = false;
+                  payload['local_authority_label'] = t.LocalAuthorityLabels;
+                }
                 keys.forEach(key => {
                     switch (key){
                         case 'Regions':
@@ -7021,7 +7028,7 @@
                         p5 == null || p5.forEach(x=>{
                                 let y = v.value.HotWaterEnergyEfficiency;
                                 x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
-                                v.setValue("HotWaterEnergyEfficiency", y)
+                                v.setValue("HotWaterEnergyEfficiency", (y.length == 0 ? null : y))
                             }
                         )
                         // set Energy Efficiency windows Efficiency
@@ -7029,7 +7036,7 @@
                         p6 == null || p6.forEach(x=>{
                                 let y = v.value.WindowsEnergyEfficiency;
                                 x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
-                                v.setValue("WindowsEnergyEfficiency", y)
+                                v.setValue("WindowsEnergyEfficiency", (y.length == 0 ? null : y))
                             }
                         )
                         // set Energy Efficiency walls Efficiency
@@ -7037,7 +7044,7 @@
                         p7 == null || p7.forEach(x=>{
                                 let y = v.value.WallsEnergyEfficiency;
                                 x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
-                                v.setValue("WallsEnergyEfficiency", y)
+                                v.setValue("WallsEnergyEfficiency", (y.length == 0 ? null : y))
                             }
                         )
                         // set Energy Efficiency roof Efficiency
@@ -7045,7 +7052,7 @@
                         p8 == null || p8.forEach(x=>{
                                 let y = v.value.RoofEnergyEfficiency;
                                 x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
-                                v.setValue("RoofEnergyEfficiency", y)
+                                v.setValue("RoofEnergyEfficiency", (y.length == 0 ? null : y))
                             }
                         )
                         // lightening
@@ -7054,7 +7061,7 @@
                         p18 == null || p18.forEach(x=>{
                                 let y = v.value.LightingEnergyEfficiency;
                                 x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
-                                v.setValue("LightingEnergyEfficiency", y)
+                                v.setValue("LightingEnergyEfficiency", (y.length == 0 ? null : y))
                             }
                         )
                         // set Energy Efficiency mainHeat Efficiency
@@ -7062,7 +7069,7 @@
                         p9 == null || p9.forEach(x=>{
                             let y = v.value.HeatingEnergyEfficiency;
                             x.checked ? y.push(x.value) : y = y.filter(M=>M !== x.value);
-                            v.setValue("HeatingEnergyEfficiency", y)
+                            v.setValue("HeatingEnergyEfficiency", (y.length == 0 ? null : y))
                         })
                         // set Current Consumption
                         let {currentConsumptionField: p10} = _.energyCost;
