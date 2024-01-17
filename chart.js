@@ -4648,7 +4648,7 @@
                     RoofEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
                     LightingEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
                     HeatingEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
-                    Tenure: ["owner-occupied", "rented(private)", "rented(social)", "", "unknown"],
+                    Tenure: ["owner-occupied", "rented(private)", "rented(social)", ""],
                     MainsGasFlag: ["Y", "N", ""],
                     CurrentEnergyConsumptionLower: 0,
                     CurrentEnergyConsumptionUpper: 500
