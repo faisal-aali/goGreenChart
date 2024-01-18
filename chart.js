@@ -7001,7 +7001,7 @@
                         });
                         // Set Authorities
                         let p2 = (w = _.geography.localAuthorityField) == null ? void 0 : w.querySelectorAll("input");
-                       let tempy = v.value.LocalAuthorityLabels || [];
+                       let tempy =  [];
                         p2 == null || p2.forEach((x, idx) => {
                             if (x.checked) { tempy.push(x.value); }
                             v.setValue("LocalAuthorityLabels", (p2.length == tempy.length && tempy != 0) ? null : tempy);
