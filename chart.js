@@ -4678,7 +4678,7 @@
                 // Rename keys
                 const keys = Object.keys(t);
                 let payload = {};
-                if (!t.LocalAuthorityLabels) {
+                if (!t.LocalAuthorityLabels || !t.LocalAuthorityLabels.length) {
                   payload['la_select_status'] = false;
                   payload['local_authority_label'] = null;
                 } else {
@@ -4724,7 +4724,18 @@
                             };
                             break;
                         case 'Tenure':
-                            payload['tenure'] = t[key];
+                            const tmp = {}
+                            t[key].forEach(x => {
+                              tmp[x] = true
+                            })
+                            if (tmp[''] || tmp['unknown']) {
+                              tmp['unknown'] = true;
+                              tmp[''] = true;
+                            } else {
+                              delete tmp['unknown'];
+                              delete tmp[''];
+                            }
+                            payload['tenure'] = t[key].length == 0 ? null :  Object.keys(tmp)
                             break;
                         case 'MainsGasFlag':
                             payload['mains_gas_flag'] = t[key];
