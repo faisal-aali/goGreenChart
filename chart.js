@@ -4724,7 +4724,7 @@
                             };
                             break;
                         case 'Tenure':
-                            payload['tenure'] = t[key].filter(x => x.toLowerCase() !== 'unknown');
+                            payload['tenure'] = t[key];
                             break;
                         case 'MainsGasFlag':
                             payload['mains_gas_flag'] = t[key];
