@@ -4728,8 +4728,7 @@
                             t[key].forEach(x => {
                               tmp[x] = true
                             })
-                            if (tmp[''] || tmp['unknown']) {
-                              tmp['unknown'] = true;
+                            if (tmp['unknown']) {
                               tmp[''] = true;
                             } else {
                               delete tmp['unknown'];
