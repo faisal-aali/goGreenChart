@@ -4920,7 +4920,7 @@
                 last_applied_filter = t;
                 console.log('====== CHART API PAYLOAD======');
                 console.log(payload);
-                fetch(`${Audr}/address_match`, {
+                /*fetch(`${Audr}/address_match`, {
                     method: "POST",
                     headers: {
                         Accept: "application/json",
@@ -4928,7 +4928,7 @@
                         "Authorization": `Bearer ${Fr}`
                     },
                     body: JSON.stringify(payload)
-                })
+                })*/
 
                 return t.LocalAuthorityLabels = r,
                     (await fetch(`${Br}/chart`, {
