@@ -4697,14 +4697,15 @@
                     tempdata[x]++;
                   });
 
-                  const changes = Object.values(tempdata).filter(x => x != 2);
-                  if (!changes.length) {
+                  const changed = Object.values(tempdata).filter(x => x != 2);
+                  if (!changed.length) {
                     delete payload['la_select_status'];
                     delete payload['local_authority_label'];
                   }
                 }
 
                 let temp = {};
+                let changes = null;
 
                 keys.forEach(key => {
                     switch (key){
@@ -4717,7 +4718,7 @@
                               temp[x]++;
                             });
 
-                            const changes = Object.values(temp).filter(x => x != 2);
+                             changes = Object.values(temp).filter(x => x != 2);
                             if (changes.length) {
                               payload['region'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
@@ -4742,7 +4743,7 @@
                               temp[x]++;
                             });
 
-                            const changes = Object.values(temp).filter(x => x != 2);
+                             changes = Object.values(temp).filter(x => x != 2);
                             if (changes.length) {
                               payload['current_energy_rating'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
@@ -4756,7 +4757,7 @@
                               temp[x]++;
                             });
 
-                            const changes = Object.values(temp).filter(x => x != 2);
+                             changes = Object.values(temp).filter(x => x != 2);
                             if (changes.length) {
                               payload['hot_water_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
@@ -4770,7 +4771,7 @@
                               temp[x]++;
                             });
 
-                            const changes = Object.values(temp).filter(x => x != 2);
+                             changes = Object.values(temp).filter(x => x != 2);
                             if (changes.length) {
                               payload['windows_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
@@ -4784,7 +4785,7 @@
                               temp[x]++;
                             });
 
-                            const changes = Object.values(temp).filter(x => x != 2);
+                             changes = Object.values(temp).filter(x => x != 2);
                             if (changes.length) {
                               payload['walls_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
@@ -4798,7 +4799,7 @@
                               temp[x]++;
                             });
 
-                            const changes = Object.values(temp).filter(x => x != 2);
+                             changes = Object.values(temp).filter(x => x != 2);
                             if (changes.length) {
                               payload['roof_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
@@ -4812,7 +4813,7 @@
                               temp[x]++;
                             });
 
-                            const changes = Object.values(temp).filter(x => x != 2);
+                             changes = Object.values(temp).filter(x => x != 2);
                             if (changes.length) {
                               payload['mainheat_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
@@ -4826,7 +4827,7 @@
                               temp[x]++;
                             });
 
-                            const changes = Object.values(temp).filter(x => x != 2);
+                             changes = Object.values(temp).filter(x => x != 2);
                             if (changes.length) {
                               payload['lighting_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
@@ -4862,7 +4863,7 @@
                               temp[x]++;
                             });
 
-                            const changes = Object.values(temp).filter(x => x != 2);
+                             changes = Object.values(temp).filter(x => x != 2);
                             if (changes.length) {
                               payload['tenure'] = t[key].length == 0 ? null : Object.keys(tmp)
                             }
@@ -4876,7 +4877,7 @@
                               temp[x]++;
                             });
 
-                            const changes = Object.values(temp).filter(x => x != 2);
+                             changes = Object.values(temp).filter(x => x != 2);
                             if (changes.length) {
                               payload['mains_gas_flag'] = t[key];
                             }
