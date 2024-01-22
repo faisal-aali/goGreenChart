@@ -1,6 +1,7 @@
 "use strict";
 (()=>{
         var Ea = Object.create;
+        var last_applied_filter = null;
         var Rr = Object.defineProperty;
         var wa = Object.getOwnPropertyDescriptor;
         var ba = Object.getOwnPropertyNames;
@@ -52,7 +53,8 @@
                 }
             }
         );
-        var Br = "https://api-gogreen-ai.deno.dev/addresses"
+        var Br = "https://api-gogreen-ai.deno.dev/addresses",
+         Audr = "https://api-gogreen-ai.deno.dev/audience"
             , Fr = "di3T?IHUjH91mgCKs3IrVe5HYP8ctOOH";
         var qr = "chart";
         var Pr = ["wrapper", "filters-wrapper","filters-submit-button", "filters-reset-button", "filter-toggle", "filter-content", "filter-summary-label", "geography-filter-wrapper", "region-filter", "local-authority-filter", "fuel-poverty-rate-filter", "energy-efficiency-filter-wrapper", "current-rating-filter", "hot-water-efficiency-filter", "windows-efficiency-filter", "walls-efficiency-filter", "roof-efficiency-filter", "main-heat-efficiency-filter", "lighting-efficiency-filter", "energy-cost-filter-wrapper", "current-consumption-filter", "household-income-filter-wrapper", "tenure-filter", "main-gas-filter", "income-deprivation-domain-filter", "income-deprivation-children-filter", "income-deprivation-elderly-filter", "addresses-count", "toolbar", "chart-toggle", "search", "canvas", "canvas-placeholder", "loader"]
@@ -4685,43 +4687,158 @@
                   payload['la_select_status'] = true;
                   payload['local_authority_label'] = t.LocalAuthorityLabels;
                 }
+
+                if (last_applied_filter) {
+                  let tempdata = {};
+                  [...((last_applied_filter || {})['LocalAuthorityLabels'] || [])].forEach(x => {
+                    if (!tempdata[x]) {
+                      tempdata[x] = 0
+                    }
+                    tempdata[x]++;
+                  });
+
+                  const changes = Object.values(tempdata).filter(x => x != 2);
+                  if (!changes.length) {
+                    delete payload['la_select_status'];
+                    delete payload['local_authority_label'];
+                  }
+                }
+
                 keys.forEach(key => {
                     switch (key){
                         case 'Regions':
-                            payload['region'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            let temp = {};
+                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
+                              if (!temp[x]) {
+                                temp[x] = 0
+                              }
+                              temp[x]++;
+                            });
+
+                            const changes = Object.values(temp).filter(x => x != 2);
+                            if (changes.length) {
+                              payload['region'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            }
                             break;
                         case 'FuelPovertyRateLower':
-                            payload['house_fuel_poverty'] = {
-                                'lower': t[key],
-                                'higher': t['FuelPovertyRateUpper']
-                            };
+                            if (last_applied_filter && last_applied_filter[key] === t[key]
+                              && last_applied_filter['FuelPovertyRateUpper'] === t['FuelPovertyRateUpper']) {
+                              delete payload['house_fuel_poverty'];
+                            } else {
+                              payload['house_fuel_poverty'] = {
+                                  'lower': t[key],
+                                  'higher': t['FuelPovertyRateUpper']
+                              };
+                            }
                             break;
                         case 'CurrentEnergyRating':
-                            payload['current_energy_rating'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            let temp = {};
+                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
+                              if (!temp[x]) {
+                                temp[x] = 0
+                              }
+                              temp[x]++;
+                            });
+
+                            const changes = Object.values(temp).filter(x => x != 2);
+                            if (changes.length) {
+                              payload['current_energy_rating'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            }
                             break;
                         case 'HotWaterEnergyEfficiency':
-                            payload['hot_water_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            let temp = {};
+                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
+                              if (!temp[x]) {
+                                temp[x] = 0
+                              }
+                              temp[x]++;
+                            });
+
+                            const changes = Object.values(temp).filter(x => x != 2);
+                            if (changes.length) {
+                              payload['hot_water_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            }
                             break;
                         case 'WindowsEnergyEfficiency':
-                            payload['windows_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            let temp = {};
+                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
+                              if (!temp[x]) {
+                                temp[x] = 0
+                              }
+                              temp[x]++;
+                            });
+
+                            const changes = Object.values(temp).filter(x => x != 2);
+                            if (changes.length) {
+                              payload['windows_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            }
                             break;
                         case 'WallsEnergyEfficiency':
-                            payload['walls_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            let temp = {};
+                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
+                              if (!temp[x]) {
+                                temp[x] = 0
+                              }
+                              temp[x]++;
+                            });
+
+                            const changes = Object.values(temp).filter(x => x != 2);
+                            if (changes.length) {
+                              payload['walls_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            }
                             break;
                         case 'RoofEnergyEfficiency':
-                            payload['roof_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            let temp = {};
+                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
+                              if (!temp[x]) {
+                                temp[x] = 0
+                              }
+                              temp[x]++;
+                            });
+
+                            const changes = Object.values(temp).filter(x => x != 2);
+                            if (changes.length) {
+                              payload['roof_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            }
                             break;
                         case 'HeatingEnergyEfficiency':
-                            payload['mainheat_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            let temp = {};
+                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
+                              if (!temp[x]) {
+                                temp[x] = 0
+                              }
+                              temp[x]++;
+                            });
+
+                            const changes = Object.values(temp).filter(x => x != 2);
+                            if (changes.length) {
+                              payload['mainheat_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            }
                             break;
                         case 'LightingEnergyEfficiency':
-                            payload['lighting_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            let temp = {};
+                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
+                              if (!temp[x]) {
+                                temp[x] = 0
+                              }
+                              temp[x]++;
+                            });
+
+                            const changes = Object.values(temp).filter(x => x != 2);
+                            if (changes.length) {
+                              payload['lighting_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            }
                             break;
                         case 'CurrentEnergyConsumptionLower':
-                            payload['energy_consumption_current'] = {
-                                lower: (Number(t[key]) == 313) ? 312274 : (Number(t[key]) * 1000),
-                                higher: (Number(t['CurrentEnergyConsumptionUpper']) == 313) ? 312274 : (Number(t['CurrentEnergyConsumptionUpper']) * 1000)
-                            };
+                            if (last_applied_filter && last_applied_filter[key] === t[key]
+                              && last_applied_filter['CurrentEnergyConsumptionUpper'] === t['CurrentEnergyConsumptionUpper']) {
+                              return
+                            } else {
+                              payload['energy_consumption_current'] = {
+                                  lower: (Number(t[key]) == 313) ? 312274 : (Number(t[key]) * 1000),
+                                  higher: (Number(t['CurrentEnergyConsumptionUpper']) == 313) ? 312274 : (Number(t['CurrentEnergyConsumptionUpper']) * 1000)
+                              };
+                            }
                             break;
                         case 'Tenure':
                             const tmp = {}
@@ -4734,33 +4851,82 @@
                               delete tmp['unknown'];
                               delete tmp[''];
                             }
-                            payload['tenure'] = t[key].length == 0 ? null :  Object.keys(tmp)
+
+                            let temp = {};
+                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
+                              if (!temp[x]) {
+                                temp[x] = 0
+                              }
+                              temp[x]++;
+                            });
+
+                            const changes = Object.values(temp).filter(x => x != 2);
+                            if (changes.length) {
+                              payload['tenure'] = t[key].length == 0 ? null : Object.keys(tmp)
+                            }
                             break;
                         case 'MainsGasFlag':
-                            payload['mains_gas_flag'] = t[key];
+                            let temp = {};
+                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
+                              if (!temp[x]) {
+                                temp[x] = 0
+                              }
+                              temp[x]++;
+                            });
+
+                            const changes = Object.values(temp).filter(x => x != 2);
+                            if (changes.length) {
+                              payload['mains_gas_flag'] = t[key];
+                            }
                             break;
                         case 'IncomeDeprivationRangeChildLower':
-                            payload['idc_value'] = {
+                            if (last_applied_filter && last_applied_filter[key] === t[key]
+                                && last_applied_filter['IncomeDeprivationRangeChildUpper'] === t['IncomeDeprivationRangeChildUpper']) {
+                                return
+                            } else {
+                              payload['idc_value'] = {
                                 'lower': t[key],
                                 'higher': t['IncomeDeprivationRangeChildUpper']
-                            };
+                              };
+                            }
                             break;
                         case 'IncomeDeprivationRangeElderLower':
-                            payload['idop_value'] = {
-                                'lower': t[key],
-                                'higher': t['IncomeDeprivationRangeElderUpper']
-                            };
+                            if (last_applied_filter && last_applied_filter[key] === t[key]
+                                && last_applied_filter['IncomeDeprivationRangeElderUpper'] === t['IncomeDeprivationRangeElderUpper']) {
+                                return
+                            } else {
+                              payload['idop_value'] = {
+                                  'lower': t[key],
+                                  'higher': t['IncomeDeprivationRangeElderUpper']
+                              };
+                            }
                             break;
                         case 'IncomeDeprivationRangeLower':
-                            payload['income_deprivation_value'] = {
+                            if (last_applied_filter && last_applied_filter[key] === t[key]
+                                && last_applied_filter['IncomeDeprivationRangeUpper'] === t['IncomeDeprivationRangeUpper']) {
+                                return
+                            } else {
+                              payload['income_deprivation_value'] = {
                                 'lower': t[key],
                                 'higher': t['IncomeDeprivationRangeUpper']
-                            };
+                              };
+                            }
                             break;
                     }
                 });
+                last_applied_filter = t;
                 console.log('====== CHART API PAYLOAD======');
                 console.log(payload);
+                fetch(`${Audr}/address_match`, {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${Fr}`
+                    },
+                    body: JSON.stringify(payload)
+                })
+
                 return t.LocalAuthorityLabels = r,
                     (await fetch(`${Br}/chart`, {
                         method: "POST",
