@@ -4704,10 +4704,12 @@
                   }
                 }
 
+                let temp = {};
+
                 keys.forEach(key => {
                     switch (key){
                         case 'Regions':
-                            let temp = {};
+                            temp = {};
                             [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
                               if (!temp[x]) {
                                 temp[x] = 0
@@ -4732,7 +4734,7 @@
                             }
                             break;
                         case 'CurrentEnergyRating':
-                            let temp = {};
+                            temp = {};
                             [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
                               if (!temp[x]) {
                                 temp[x] = 0
@@ -4746,7 +4748,7 @@
                             }
                             break;
                         case 'HotWaterEnergyEfficiency':
-                            let temp = {};
+                            temp = {};
                             [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
                               if (!temp[x]) {
                                 temp[x] = 0
@@ -4760,7 +4762,7 @@
                             }
                             break;
                         case 'WindowsEnergyEfficiency':
-                            let temp = {};
+                            temp = {};
                             [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
                               if (!temp[x]) {
                                 temp[x] = 0
@@ -4774,7 +4776,7 @@
                             }
                             break;
                         case 'WallsEnergyEfficiency':
-                            let temp = {};
+                            temp = {};
                             [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
                               if (!temp[x]) {
                                 temp[x] = 0
@@ -4788,7 +4790,7 @@
                             }
                             break;
                         case 'RoofEnergyEfficiency':
-                            let temp = {};
+                            temp = {};
                             [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
                               if (!temp[x]) {
                                 temp[x] = 0
@@ -4802,7 +4804,7 @@
                             }
                             break;
                         case 'HeatingEnergyEfficiency':
-                            let temp = {};
+                            temp = {};
                             [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
                               if (!temp[x]) {
                                 temp[x] = 0
@@ -4816,7 +4818,7 @@
                             }
                             break;
                         case 'LightingEnergyEfficiency':
-                            let temp = {};
+                            temp = {};
                             [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
                               if (!temp[x]) {
                                 temp[x] = 0
@@ -4852,7 +4854,7 @@
                               delete tmp[''];
                             }
 
-                            let temp = {};
+                            temp = {};
                             [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
                               if (!temp[x]) {
                                 temp[x] = 0
@@ -4866,7 +4868,7 @@
                             }
                             break;
                         case 'MainsGasFlag':
-                            let temp = {};
+                            temp = {};
                             [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
                               if (!temp[x]) {
                                 temp[x] = 0
