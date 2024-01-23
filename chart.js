@@ -4716,6 +4716,13 @@
                         case 'Regions':
                             if (compare_arrays(key, last_applied_filter, t)) {
                               payload['region'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                              if (!t.LocalAuthorityLabels || !t.LocalAuthorityLabels.length) {
+                                payload['la_select_status'] = false;
+                                payload['local_authority_label'] = null;
+                              } else {
+                                payload['la_select_status'] = true;
+                                payload['local_authority_label'] = t.LocalAuthorityLabels;
+                              }
                             }
                             break;
                         case 'FuelPovertyRateLower':
