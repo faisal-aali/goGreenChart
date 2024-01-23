@@ -4839,7 +4839,7 @@
                             break;
                     }
                 });
-                last_applied_filter = t;
+                last_applied_filter = JSON.parse(JSON.stringify(t));
                 console.log('====== CHART API PAYLOAD======');
                 console.log(payload);
                 /*fetch(`${Audr}/address_match`, {
