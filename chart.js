@@ -4705,7 +4705,7 @@
                 }
 
                 if (last_applied_filter) {
-                  if (compare_arrays('LocalAuthorityLabels', last_applied_filter, t)) {
+                  if (!compare_arrays('LocalAuthorityLabels', last_applied_filter, t)) {
                     delete payload['la_select_status'];
                     delete payload['local_authority_label'];
                   }
