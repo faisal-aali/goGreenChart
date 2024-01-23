@@ -4705,16 +4705,7 @@
                 }
 
                 if (last_applied_filter) {
-                  let tempdata = {};
-                  [...((last_applied_filter || {})['LocalAuthorityLabels'] || [])].forEach(x => {
-                    if (!tempdata[x]) {
-                      tempdata[x] = 0
-                    }
-                    tempdata[x]++;
-                  });
-
-                  const changed = Object.values(tempdata).filter(x => x != 2);
-                  if (!changed.length) {
+                  if (compare_arrays('LocalAuthorityLabels', last_applied_filter, t)) {
                     delete payload['la_select_status'];
                     delete payload['local_authority_label'];
                   }
