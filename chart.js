@@ -11,6 +11,22 @@
             exports: {}
         }).exports, e),
             e.exports);
+
+        var compare_arrays = (key, last_filters, profile_filters_form) => {
+          const temp = {};
+          [...((last_filters || {})[key] || []), ...(profile_filters_form[key] || [])]
+          .forEach(x => {
+            if (!temp[x]) {
+              temp[x] = 0
+            }
+
+            temp[x]++;
+          });
+
+          const changes = Object.values(temp).filter(x => x != 2);
+          return !!changes.length;
+        };
+
         var Na = (t,e,r,o)=>{
                 if (e && typeof e == "object" || typeof e == "function")
                     for (let n of ba(e))
@@ -4704,22 +4720,10 @@
                   }
                 }
 
-                let temp = {};
-                let changes = null;
-
                 keys.forEach(key => {
                     switch (key){
                         case 'Regions':
-                            temp = {};
-                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
-                              if (!temp[x]) {
-                                temp[x] = 0
-                              }
-                              temp[x]++;
-                            });
-
-                             changes = Object.values(temp).filter(x => x != 2);
-                            if (changes.length) {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                               payload['region'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
@@ -4735,100 +4739,37 @@
                             }
                             break;
                         case 'CurrentEnergyRating':
-                            temp = {};
-                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
-                              if (!temp[x]) {
-                                temp[x] = 0
-                              }
-                              temp[x]++;
-                            });
-
-                             changes = Object.values(temp).filter(x => x != 2);
-                            if (changes.length) {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                               payload['current_energy_rating'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'HotWaterEnergyEfficiency':
-                            temp = {};
-                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
-                              if (!temp[x]) {
-                                temp[x] = 0
-                              }
-                              temp[x]++;
-                            });
-
-                             changes = Object.values(temp).filter(x => x != 2);
-                            if (changes.length) {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                               payload['hot_water_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'WindowsEnergyEfficiency':
-                            temp = {};
-                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
-                              if (!temp[x]) {
-                                temp[x] = 0
-                              }
-                              temp[x]++;
-                            });
-
-                             changes = Object.values(temp).filter(x => x != 2);
-                            if (changes.length) {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                               payload['windows_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'WallsEnergyEfficiency':
-                            temp = {};
-                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
-                              if (!temp[x]) {
-                                temp[x] = 0
-                              }
-                              temp[x]++;
-                            });
-
-                             changes = Object.values(temp).filter(x => x != 2);
-                            if (changes.length) {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                               payload['walls_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'RoofEnergyEfficiency':
-                            temp = {};
-                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
-                              if (!temp[x]) {
-                                temp[x] = 0
-                              }
-                              temp[x]++;
-                            });
-
-                             changes = Object.values(temp).filter(x => x != 2);
-                            if (changes.length) {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                               payload['roof_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'HeatingEnergyEfficiency':
-                            temp = {};
-                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
-                              if (!temp[x]) {
-                                temp[x] = 0
-                              }
-                              temp[x]++;
-                            });
-
-                             changes = Object.values(temp).filter(x => x != 2);
-                            if (changes.length) {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                               payload['mainheat_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'LightingEnergyEfficiency':
-                            temp = {};
-                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
-                              if (!temp[x]) {
-                                temp[x] = 0
-                              }
-                              temp[x]++;
-                            });
-
-                             changes = Object.values(temp).filter(x => x != 2);
-                            if (changes.length) {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                               payload['lighting_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
@@ -4844,41 +4785,22 @@
                             }
                             break;
                         case 'Tenure':
-                            const tmp = {}
-                            t[key].forEach(x => {
-                              tmp[x] = true
-                            })
-                            if (tmp['unknown']) {
-                              tmp[''] = true;
-                            } else {
-                              delete tmp['unknown'];
-                              delete tmp[''];
-                            }
-
-                            temp = {};
-                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
-                              if (!temp[x]) {
-                                temp[x] = 0
+                            if (compare_arrays(key, last_applied_filter, t)) {
+                              const tmp = {}
+                              t[key].forEach(x => {
+                                tmp[x] = true
+                              })
+                              if (tmp['unknown']) {
+                                tmp[''] = true;
+                              } else {
+                                delete tmp['unknown'];
+                                delete tmp[''];
                               }
-                              temp[x]++;
-                            });
-
-                             changes = Object.values(temp).filter(x => x != 2);
-                            if (changes.length) {
                               payload['tenure'] = t[key].length == 0 ? null : Object.keys(tmp)
                             }
                             break;
                         case 'MainsGasFlag':
-                            temp = {};
-                            [...((last_applied_filter || {})[key] || []), ...(t[key] || [])].forEach(x => {
-                              if (!temp[x]) {
-                                temp[x] = 0
-                              }
-                              temp[x]++;
-                            });
-
-                             changes = Object.values(temp).filter(x => x != 2);
-                            if (changes.length) {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                               payload['mains_gas_flag'] = t[key];
                             }
                             break;
