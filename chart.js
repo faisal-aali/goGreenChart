@@ -4696,7 +4696,7 @@
                 // Rename keys
                 const keys = Object.keys(t);
                 let payload = {};
-                if (!t.LocalAuthorityLabels || !t.LocalAuthorityLabels.length) {
+                if (t.LocalAuthorityLabels.length == 296 || !t.LocalAuthorityLabels.length) {
                   payload['la_select_status'] = false;
                   payload['local_authority_label'] = null;
                 } else {
@@ -4716,7 +4716,7 @@
                         case 'Regions':
                             if (compare_arrays(key, last_applied_filter, t)) {
                               payload['region'] = (!t[key] || t[key].length == 0) ? null : t[key];
-                              if (!t.LocalAuthorityLabels || !t.LocalAuthorityLabels.length) {
+                              if (t.LocalAuthorityLabels.length == 296 || !t.LocalAuthorityLabels.length) {
                                 payload['la_select_status'] = false;
                                 payload['local_authority_label'] = null;
                               } else {
@@ -7103,7 +7103,7 @@
                        let tempy =  [];
                         p2 == null || p2.forEach((x, idx) => {
                             if (x.checked) { tempy.push(x.value); }
-                            v.setValue("LocalAuthorityLabels", (p2.length == tempy.length && tempy != 0) ? null : tempy);
+                            v.setValue("LocalAuthorityLabels", tempy);
                             (p2.length == tempy.length && tempy != 0) ? v.setValue("la_select_status", true) : v.setValue("la_select_status", false)
                         });
                         // Set Poverty Rate
