@@ -4704,12 +4704,6 @@
                   payload['local_authority_label'] = t.LocalAuthorityLabels;
                 }
 
-                if (last_applied_filter) {
-                  if (!compare_arrays('LocalAuthorityLabels', last_applied_filter, t)) {
-                    delete payload['la_select_status'];
-                    delete payload['local_authority_label'];
-                  }
-                }
 
                 keys.forEach(key => {
                     switch (key){
