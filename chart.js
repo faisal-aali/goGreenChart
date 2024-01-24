@@ -7090,8 +7090,8 @@
                         }
                     ;
                     return [q(t.querySelector(A["filters-reset-button"]), "click", async()=>{
-                            v.reset();
-                            await H();
+                            // v.reset();
+                            // await H();
                         }
                     ),q(t.querySelector(A["filters-submit-button"]), "click", async()=>{
                         // Set Region
