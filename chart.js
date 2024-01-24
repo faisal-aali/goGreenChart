@@ -7086,7 +7086,7 @@
                     ;
                     return [q(t.querySelector(A["filters-reset-button"]), "click", async()=>{
                             v.reset();
-                            await H()
+                            await NN();
                         }
                     ),q(t.querySelector(A["filters-submit-button"]), "click", async()=>{
                         // Set Region
