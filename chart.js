@@ -13,18 +13,18 @@
             e.exports);
 
         var compare_arrays = (key, last_filters, profile_filters_form) => {
-          const temp = {};
-          [...((last_filters || {})[key] || []), ...(profile_filters_form[key] || [])]
-          .forEach(x => {
-            if (!temp[x]) {
-              temp[x] = 0
-            }
+            const temp = {};
+            [...((last_filters || {})[key] || []), ...(profile_filters_form[key] || [])]
+                .forEach(x => {
+                    if (!temp[x]) {
+                        temp[x] = 0
+                    }
 
-            temp[x]++;
-          });
+                    temp[x]++;
+                });
 
-          const changes = Object.values(temp).filter(x => x != 2);
-          return !!changes.length;
+            const changes = Object.values(temp).filter(x => x != 2);
+            return !!changes.length;
         };
 
         var Na = (t,e,r,o)=>{
@@ -70,7 +70,7 @@
             }
         );
         var Br = "https://api-gogreen-ai.deno.dev/addresses",
-         Audr = "https://api-gogreen-ai.deno.dev/audience"
+            Audr = "https://api-gogreen-ai.deno.dev/audience"
             , Fr = "di3T?IHUjH91mgCKs3IrVe5HYP8ctOOH";
         var qr = "chart";
         var Pr = ["wrapper", "filters-wrapper","filters-submit-button", "filters-reset-button", "filter-toggle", "filter-content", "filter-summary-label", "geography-filter-wrapper", "region-filter", "local-authority-filter", "fuel-poverty-rate-filter", "energy-efficiency-filter-wrapper", "current-rating-filter", "hot-water-efficiency-filter", "windows-efficiency-filter", "walls-efficiency-filter", "roof-efficiency-filter", "main-heat-efficiency-filter", "lighting-efficiency-filter", "energy-cost-filter-wrapper", "current-consumption-filter", "household-income-filter-wrapper", "tenure-filter", "main-gas-filter", "income-deprivation-domain-filter", "income-deprivation-children-filter", "income-deprivation-elderly-filter", "addresses-count", "toolbar", "chart-toggle", "search", "canvas", "canvas-placeholder", "loader"]
@@ -4695,143 +4695,148 @@
                     , r = (t.LocalAuthorityLabels || []).filter(n=>e.map(a=>a.name).includes(n));
                 // Rename keys
                 const keys = Object.keys(t);
+                let mode = 'apply';
+                const submit = document.querySelectorAll('input[data-chart-element="filters-submit-button"]');
+                if (submit && submit[0] && submit[0].getAttribute('data-mode') === 'reset') {
+                    mode = 'reset';
+                }
                 let payload = {};
                 if (t.LocalAuthorityLabels.length == 296 || !t.LocalAuthorityLabels.length) {
-                  payload['la_select_status'] = false;
-                  payload['local_authority_label'] = null;
+                    payload['la_select_status'] = false;
+                    payload['local_authority_label'] = null;
                 } else {
-                  payload['la_select_status'] = true;
-                  payload['local_authority_label'] = t.LocalAuthorityLabels;
+                    payload['la_select_status'] = true;
+                    payload['local_authority_label'] = t.LocalAuthorityLabels;
                 }
 
                 if (last_applied_filter) {
-                  if (!compare_arrays('LocalAuthorityLabels', last_applied_filter, t)) {
-                    delete payload['local_authority_label'];
-                  }
+                    if (!compare_arrays('LocalAuthorityLabels', last_applied_filter, t) || mode === 'reset') {
+                        delete payload['local_authority_label'];
+                    }
                 }
 
                 keys.forEach(key => {
                     switch (key){
                         case 'Regions':
                             if (compare_arrays(key, last_applied_filter, t)) {
-                              payload['region'] = (!t[key] || t[key].length == 0) ? null : t[key];
-                              if (t.LocalAuthorityLabels.length == 296 || !t.LocalAuthorityLabels.length) {
-                                payload['la_select_status'] = false;
-                                payload['local_authority_label'] = null;
-                              } else {
-                                payload['la_select_status'] = true;
-                                payload['local_authority_label'] = t.LocalAuthorityLabels;
-                              }
+                                payload['region'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                                if (t.LocalAuthorityLabels.length == 296 || !t.LocalAuthorityLabels.length) {
+                                    payload['la_select_status'] = false;
+                                    payload['local_authority_label'] = null;
+                                } else {
+                                    payload['la_select_status'] = true;
+                                    payload['local_authority_label'] = t.LocalAuthorityLabels;
+                                }
                             }
                             break;
                         case 'FuelPovertyRateLower':
                             if (last_applied_filter && last_applied_filter[key] === t[key]
-                              && last_applied_filter['FuelPovertyRateUpper'] === t['FuelPovertyRateUpper']) {
-                              delete payload['house_fuel_poverty'];
+                                && last_applied_filter['FuelPovertyRateUpper'] === t['FuelPovertyRateUpper'] && mode !== 'reset') {
+                                delete payload['house_fuel_poverty'];
                             } else {
-                              payload['house_fuel_poverty'] = {
-                                  'lower': t[key],
-                                  'higher': t['FuelPovertyRateUpper']
-                              };
+                                payload['house_fuel_poverty'] = {
+                                    'lower': t[key],
+                                    'higher': t['FuelPovertyRateUpper']
+                                };
                             }
                             break;
                         case 'CurrentEnergyRating':
-                            if (compare_arrays(key, last_applied_filter, t)) {
-                              payload['current_energy_rating'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                                payload['current_energy_rating'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'HotWaterEnergyEfficiency':
-                            if (compare_arrays(key, last_applied_filter, t)) {
-                              payload['hot_water_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                                payload['hot_water_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'WindowsEnergyEfficiency':
-                            if (compare_arrays(key, last_applied_filter, t)) {
-                              payload['windows_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                                payload['windows_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'WallsEnergyEfficiency':
-                            if (compare_arrays(key, last_applied_filter, t)) {
-                              payload['walls_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                                payload['walls_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'RoofEnergyEfficiency':
-                            if (compare_arrays(key, last_applied_filter, t)) {
-                              payload['roof_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                                payload['roof_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'HeatingEnergyEfficiency':
-                            if (compare_arrays(key, last_applied_filter, t)) {
-                              payload['mainheat_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                                payload['mainheat_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'LightingEnergyEfficiency':
-                            if (compare_arrays(key, last_applied_filter, t)) {
-                              payload['lighting_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
+                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                                payload['lighting_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'CurrentEnergyConsumptionLower':
                             if (last_applied_filter && last_applied_filter[key] === t[key]
-                              && last_applied_filter['CurrentEnergyConsumptionUpper'] === t['CurrentEnergyConsumptionUpper']) {
-                              return
+                                && last_applied_filter['CurrentEnergyConsumptionUpper'] === t['CurrentEnergyConsumptionUpper'] && mode !== 'reset') {
+                                return
                             } else {
-                              payload['energy_consumption_current'] = {
-                                  lower: (Number(t[key]) == 313) ? 312274 : (Number(t[key]) * 1000),
-                                  higher: (Number(t['CurrentEnergyConsumptionUpper']) == 313) ? 312274 : (Number(t['CurrentEnergyConsumptionUpper']) * 1000)
-                              };
+                                payload['energy_consumption_current'] = {
+                                    lower: (Number(t[key]) == 313) ? 312274 : (Number(t[key]) * 1000),
+                                    higher: (Number(t['CurrentEnergyConsumptionUpper']) == 313) ? 312274 : (Number(t['CurrentEnergyConsumptionUpper']) * 1000)
+                                };
                             }
                             break;
                         case 'Tenure':
-                            if (compare_arrays(key, last_applied_filter, t)) {
-                              const tmp = {}
-                              t[key].forEach(x => {
-                                tmp[x] = true
-                              })
-                              if (tmp['unknown']) {
-                                tmp[''] = true;
-                              } else {
-                                delete tmp['unknown'];
-                                delete tmp[''];
-                              }
-                              payload['tenure'] = t[key].length == 0 ? null : Object.keys(tmp)
+                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                                const tmp = {}
+                                t[key].forEach(x => {
+                                    tmp[x] = true
+                                })
+                                if (tmp['unknown']) {
+                                    tmp[''] = true;
+                                } else {
+                                    delete tmp['unknown'];
+                                    delete tmp[''];
+                                }
+                                payload['tenure'] = t[key].length === 0 ? null : Object.keys(tmp)
                             }
                             break;
                         case 'MainsGasFlag':
-                            if (compare_arrays(key, last_applied_filter, t)) {
-                              payload['mains_gas_flag'] = t[key];
+                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                                payload['mains_gas_flag'] = t[key];
                             }
                             break;
                         case 'IncomeDeprivationRangeChildLower':
                             if (last_applied_filter && last_applied_filter[key] === t[key]
-                                && last_applied_filter['IncomeDeprivationRangeChildUpper'] === t['IncomeDeprivationRangeChildUpper']) {
+                                && last_applied_filter['IncomeDeprivationRangeChildUpper'] === t['IncomeDeprivationRangeChildUpper'] && mode !== 'reset') {
                                 return
                             } else {
-                              payload['idc_value'] = {
-                                'lower': t[key],
-                                'higher': t['IncomeDeprivationRangeChildUpper']
-                              };
+                                payload['idc_value'] = {
+                                    'lower': t[key],
+                                    'higher': t['IncomeDeprivationRangeChildUpper']
+                                };
                             }
                             break;
                         case 'IncomeDeprivationRangeElderLower':
                             if (last_applied_filter && last_applied_filter[key] === t[key]
-                                && last_applied_filter['IncomeDeprivationRangeElderUpper'] === t['IncomeDeprivationRangeElderUpper']) {
+                                && last_applied_filter['IncomeDeprivationRangeElderUpper'] === t['IncomeDeprivationRangeElderUpper'] && mode !== 'reset') {
                                 return
                             } else {
-                              payload['idop_value'] = {
-                                  'lower': t[key],
-                                  'higher': t['IncomeDeprivationRangeElderUpper']
-                              };
+                                payload['idop_value'] = {
+                                    'lower': t[key],
+                                    'higher': t['IncomeDeprivationRangeElderUpper']
+                                };
                             }
                             break;
                         case 'IncomeDeprivationRangeLower':
                             if (last_applied_filter && last_applied_filter[key] === t[key]
-                                && last_applied_filter['IncomeDeprivationRangeUpper'] === t['IncomeDeprivationRangeUpper']) {
+                                && last_applied_filter['IncomeDeprivationRangeUpper'] === t['IncomeDeprivationRangeUpper'] && mode !== 'reset') {
                                 return
                             } else {
-                              payload['income_deprivation_value'] = {
-                                'lower': t[key],
-                                'higher': t['IncomeDeprivationRangeUpper']
-                              };
+                                payload['income_deprivation_value'] = {
+                                    'lower': t[key],
+                                    'higher': t['IncomeDeprivationRangeUpper']
+                                };
                             }
                             break;
                     }
@@ -7099,7 +7104,7 @@
                         });
                         // Set Authorities
                         let p2 = (w = _.geography.localAuthorityField) == null ? void 0 : w.querySelectorAll("input");
-                       let tempy =  [];
+                        let tempy =  [];
                         p2 == null || p2.forEach((x, idx) => {
                             if (x.checked) { tempy.push(x.value); }
                             v.setValue("LocalAuthorityLabels", tempy);
@@ -7404,11 +7409,11 @@
         ;
         window.Webflow || (window.Webflow = []);
         window.Webflow.push(()=>{
-                document.querySelectorAll(A.wrapper).forEach((e,r)=>{
-                        let o = xa(e, r);
-                        o == null || o.build()
-                    }
-                );
+            document.querySelectorAll(A.wrapper).forEach((e,r)=>{
+                    let o = xa(e, r);
+                    o == null || o.build()
+                }
+            );
         });
     }
 )();
