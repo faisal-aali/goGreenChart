@@ -7010,7 +7010,7 @@
                         F()
                         console.log("Chart file loaded: calling API's now");
                         if(window.location.pathname !== '/profile-creation') {
-                            document.querySelector('.filters_submit-button').click();
+                            document.querySelector('a[wized="profile_filters_reset"]').click();
                         } else {
                             document.querySelector('.filters_submit-button').click(); // TODO: instead of triggering click event listen an event from wized that filters are loaded
                             q(document.querySelector('a[wized="chart_section_toggle"]'), "click", (e)=>{
