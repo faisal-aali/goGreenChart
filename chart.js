@@ -4696,8 +4696,8 @@
                 // Rename keys
                 const keys = Object.keys(t);
                 let mode = 'apply';
-                const submit = document.querySelectorAll('input[data-chart-element="filters-submit-button"]');
-                if (submit && submit[0] && submit[0].getAttribute('data-mode') === 'reset') {
+                const reset = document.querySelectorAll('a[data-chart-element="filters-reset-button"]');
+                if (reset && reset[0] && reset[0].getAttribute('data-mode') === 'reset') {
                     mode = 'reset';
                 }
                 let payload = {};
