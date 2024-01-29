@@ -4704,6 +4704,7 @@
                     payload['local_authority_label'] = t.LocalAuthorityLabels;
                 }
                 if ( mode === 'reset') {
+                    last_applied_filter = JSON.parse(JSON.stringify(t));
                     console.log('====== CHART API RESET ======');
                     return t.LocalAuthorityLabels = r,
                         (await fetch(`${Br}/chart`, {
