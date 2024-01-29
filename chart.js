@@ -4689,28 +4689,36 @@
             async locationData() {
                 return "locationData"
             },
-            async findAddressCount(t) {
+            async findAddressCount(t, mode = 'apply') {
                 t || (t = ze().value);
                 let e = ga.filter(n=>t.Regions.includes(n.region_name))
                     , r = (t.LocalAuthorityLabels || []).filter(n=>e.map(a=>a.name).includes(n));
                 // Rename keys
                 const keys = Object.keys(t);
-                let mode = 'apply';
-                const reset = document.querySelectorAll('a[data-chart-element="filters-reset-button"]');
-                if (reset && reset[0] && reset[0].getAttribute('data-mode') === 'reset') {
-                    mode = 'reset';
-                }
                 let payload = {};
-                if (t.LocalAuthorityLabels.length == 296 || !t.LocalAuthorityLabels.length) {
+                if (t.LocalAuthorityLabels.length === 296 || !t.LocalAuthorityLabels.length) {
                     payload['la_select_status'] = false;
                     payload['local_authority_label'] = null;
                 } else {
                     payload['la_select_status'] = true;
                     payload['local_authority_label'] = t.LocalAuthorityLabels;
                 }
+                if ( mode === 'reset') {
+                    console.log('====== CHART API RESET ======');
+                    return t.LocalAuthorityLabels = r,
+                        (await fetch(`${Br}/chart`, {
+                            method: "POST",
+                            headers: {
+                                Accept: "application/json",
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${Fr}`
+                            },
+                            body: JSON.stringify(payload)
+                        })).json()
+                }
 
                 if (last_applied_filter) {
-                    if (!compare_arrays('LocalAuthorityLabels', last_applied_filter, t) || mode === 'reset') {
+                    if (!compare_arrays('LocalAuthorityLabels', last_applied_filter, t)) {
                         delete payload['local_authority_label'];
                     }
                 }
@@ -4731,7 +4739,7 @@
                             break;
                         case 'FuelPovertyRateLower':
                             if (last_applied_filter && last_applied_filter[key] === t[key]
-                                && last_applied_filter['FuelPovertyRateUpper'] === t['FuelPovertyRateUpper'] && mode !== 'reset') {
+                                && last_applied_filter['FuelPovertyRateUpper'] === t['FuelPovertyRateUpper']) {
                                 delete payload['house_fuel_poverty'];
                             } else {
                                 payload['house_fuel_poverty'] = {
@@ -4741,43 +4749,43 @@
                             }
                             break;
                         case 'CurrentEnergyRating':
-                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                                 payload['current_energy_rating'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'HotWaterEnergyEfficiency':
-                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                                 payload['hot_water_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'WindowsEnergyEfficiency':
-                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                                 payload['windows_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'WallsEnergyEfficiency':
-                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                                 payload['walls_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'RoofEnergyEfficiency':
-                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                                 payload['roof_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'HeatingEnergyEfficiency':
-                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                                 payload['mainheat_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'LightingEnergyEfficiency':
-                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                                 payload['lighting_energy_eff'] = (!t[key] || t[key].length == 0) ? null : t[key];
                             }
                             break;
                         case 'CurrentEnergyConsumptionLower':
                             if (last_applied_filter && last_applied_filter[key] === t[key]
-                                && last_applied_filter['CurrentEnergyConsumptionUpper'] === t['CurrentEnergyConsumptionUpper'] && mode !== 'reset') {
+                                && last_applied_filter['CurrentEnergyConsumptionUpper'] === t['CurrentEnergyConsumptionUpper']) {
                                 return
                             } else {
                                 payload['energy_consumption_current'] = {
@@ -4787,7 +4795,7 @@
                             }
                             break;
                         case 'Tenure':
-                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                                 const tmp = {}
                                 t[key].forEach(x => {
                                     tmp[x] = true
@@ -4802,13 +4810,13 @@
                             }
                             break;
                         case 'MainsGasFlag':
-                            if (compare_arrays(key, last_applied_filter, t) || mode === 'reset') {
+                            if (compare_arrays(key, last_applied_filter, t)) {
                                 payload['mains_gas_flag'] = t[key];
                             }
                             break;
                         case 'IncomeDeprivationRangeChildLower':
                             if (last_applied_filter && last_applied_filter[key] === t[key]
-                                && last_applied_filter['IncomeDeprivationRangeChildUpper'] === t['IncomeDeprivationRangeChildUpper'] && mode !== 'reset') {
+                                && last_applied_filter['IncomeDeprivationRangeChildUpper'] === t['IncomeDeprivationRangeChildUpper']) {
                                 return
                             } else {
                                 payload['idc_value'] = {
@@ -4819,7 +4827,7 @@
                             break;
                         case 'IncomeDeprivationRangeElderLower':
                             if (last_applied_filter && last_applied_filter[key] === t[key]
-                                && last_applied_filter['IncomeDeprivationRangeElderUpper'] === t['IncomeDeprivationRangeElderUpper'] && mode !== 'reset') {
+                                && last_applied_filter['IncomeDeprivationRangeElderUpper'] === t['IncomeDeprivationRangeElderUpper']) {
                                 return
                             } else {
                                 payload['idop_value'] = {
@@ -4830,7 +4838,7 @@
                             break;
                         case 'IncomeDeprivationRangeLower':
                             if (last_applied_filter && last_applied_filter[key] === t[key]
-                                && last_applied_filter['IncomeDeprivationRangeUpper'] === t['IncomeDeprivationRangeUpper'] && mode !== 'reset') {
+                                && last_applied_filter['IncomeDeprivationRangeUpper'] === t['IncomeDeprivationRangeUpper']) {
                                 return
                             } else {
                                 payload['income_deprivation_value'] = {
@@ -4842,7 +4850,7 @@
                     }
                 });
                 last_applied_filter = JSON.parse(JSON.stringify(t));
-                console.log('====== CHART API PAYLOAD======');
+                console.log('====== CHART API PAYLOAD APPLY ======');
                 console.log(payload);
                 /*fetch(`${Audr}/address_match`, {
                     method: "POST",
@@ -7077,9 +7085,9 @@
                             // let p = await va.findAddressCount(v.value);
                             // G(p),
                             E == null || E.hide()
-                        }, NN = async()=>{
+                        }, NN = async(mode)=>{
                             E == null || E.show();
-                            let p = await va.findAddressCount(v.value);
+                            let p = await va.findAddressCount(v.value, mode);
                             G(p);
                             E == null || E.hide()
                         }
@@ -7091,7 +7099,7 @@
                     ;
                     return [q(t.querySelector(A["filters-reset-button"]), "click", async()=>{
                             // v.reset();
-                            await NN();
+                            await NN('reset');
                         }
                     ),q(t.querySelector(A["filters-submit-button"]), "click", async()=>{
                         // Set Region
@@ -7225,7 +7233,7 @@
                             v.setValue("IncomeDeprivationRangeElderUpper", Number(M != null ? M : 100));
                             v.setValue("IncomeDeprivationIndex", "Income Deprivation Elderly Domain");
                         }
-                        await NN();
+                        await NN('apply');
                     }), q(_.geography.regionField, "change", async()=>{
                             //await N()
                         }
