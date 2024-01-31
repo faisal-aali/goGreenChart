@@ -4710,6 +4710,7 @@
                 }
 
                 let payload = {};
+                debugger;
                 if (t.LocalAuthorityLabels.length === 296 || !t.LocalAuthorityLabels.length) {
                     payload['la_select_status'] = false;
                     payload['local_authority_label'] = null;
