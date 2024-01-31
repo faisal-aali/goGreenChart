@@ -4666,7 +4666,7 @@
                     RoofEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
                     LightingEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
                     HeatingEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
-                    Tenure: ["owner-occupied", "rented(private)", "rented(social)","unknown", ""],
+                    Tenure: ["owner-occupied", "rented(private)", "rented(social)","unknown"],
                     MainsGasFlag: ["Y", "N", ""],
                     CurrentEnergyConsumptionLower: -10,
                     CurrentEnergyConsumptionUpper: 313
@@ -4796,7 +4796,6 @@
                             }
                             break;
                         case 'Tenure':
-                            debugger;
                             if (compare_arrays(key, last_applied_filter, t)) {
                                 const tmp = {}
                                 t[key].forEach(x => {
