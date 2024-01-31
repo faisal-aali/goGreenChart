@@ -4695,14 +4695,6 @@
                     , r = (t.LocalAuthorityLabels || []).filter(n=>e.map(a=>a.name).includes(n));
                 // Rename keys
                 const keys = Object.keys(t);
-                let payload = {};
-                if (t.LocalAuthorityLabels.length === 296 || !t.LocalAuthorityLabels.length) {
-                    payload['la_select_status'] = false;
-                    payload['local_authority_label'] = null;
-                } else {
-                    payload['la_select_status'] = true;
-                    payload['local_authority_label'] = t.LocalAuthorityLabels;
-                }
                 if ( mode === 'reset') {
                     last_applied_filter = JSON.parse(JSON.stringify(t));
                     console.log('====== CHART API RESET ======');
@@ -4718,8 +4710,18 @@
                         })).json()
                 }
 
+                let payload = {};
+                if (t.LocalAuthorityLabels.length === 296 || !t.LocalAuthorityLabels.length) {
+                    payload['la_select_status'] = false;
+                    payload['local_authority_label'] = null;
+                } else {
+                    payload['la_select_status'] = true;
+                    payload['local_authority_label'] = t.LocalAuthorityLabels;
+                }
+
                 if (last_applied_filter) {
                     if (!compare_arrays('LocalAuthorityLabels', last_applied_filter, t)) {
+                        payload['la_select_status'] = false;
                         delete payload['local_authority_label'];
                     }
                 }
@@ -7099,9 +7101,13 @@
                         }
                     ;
                     return [q(t.querySelector(A["filters-reset-button"]), "click", async()=>{
-                            // v.reset();
+                        if(window.location.pathname !== '/profile-creation') {
                             await NN('reset');
+                        } else {
+                            last_applied_filter = null;
+                            await NN('apply');
                         }
+                    }
                     ),q(t.querySelector(A["filters-submit-button"]), "click", async()=>{
                         // Set Region
                         var w, x;
