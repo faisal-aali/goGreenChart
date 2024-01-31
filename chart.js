@@ -4703,6 +4703,7 @@
                     payload['la_select_status'] = true;
                     payload['local_authority_label'] = t.LocalAuthorityLabels;
                 }
+                debugger;
                 if ( mode === 'reset') {
                     last_applied_filter = JSON.parse(JSON.stringify(t));
                     console.log('====== CHART API RESET ======');
