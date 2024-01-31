@@ -4696,7 +4696,7 @@
                 // Rename keys
                 const keys = Object.keys(t);
                 if ( mode === 'reset') {
-                    last_applied_filter = JSON.parse(JSON.stringify(t));
+                    last_applied_filter = null;
                     console.log('====== CHART API RESET ======');
                     return t.LocalAuthorityLabels = r,
                         (await fetch(`${Br}/chart`, {
@@ -4706,7 +4706,7 @@
                                 "Content-Type": "application/json",
                                 "Authorization": `Bearer ${Fr}`
                             },
-                            body: JSON.stringify(payload)
+                            body: JSON.stringify({})
                         })).json()
                 }
 
