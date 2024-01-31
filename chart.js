@@ -4668,8 +4668,8 @@
                     HeatingEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
                     Tenure: ["owner-occupied", "rented(private)", "rented(social)","unknown", ""],
                     MainsGasFlag: ["Y", "N", ""],
-                    CurrentEnergyConsumptionLower: -10000,
-                    CurrentEnergyConsumptionUpper: 312274
+                    CurrentEnergyConsumptionLower: -10,
+                    CurrentEnergyConsumptionUpper: 313
                 };
                 function e(o, n) {
                     typeof o != "number" && (Array.isArray(n) ? t[o] = [...new Set(n)] : t[o] = n)
@@ -4785,7 +4785,6 @@
                             }
                             break;
                         case 'CurrentEnergyConsumptionLower':
-                            debugger;
                             if (last_applied_filter && last_applied_filter[key] === t[key]
                                 && last_applied_filter['CurrentEnergyConsumptionUpper'] === t['CurrentEnergyConsumptionUpper']) {
                                 return
@@ -4797,6 +4796,7 @@
                             }
                             break;
                         case 'Tenure':
+                            debugger;
                             if (compare_arrays(key, last_applied_filter, t)) {
                                 const tmp = {}
                                 t[key].forEach(x => {
