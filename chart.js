@@ -4650,7 +4650,7 @@
                     Regions: ["North West", "Yorkshire and The Humber", "West Midlands", "London", "East Midlands", "South West", "East of England", "North East", "South East"],
                     la_select_status: !1,
                     LocalAuthorityLabels: [],
-                    CurrentEnergyRating: ["A", "B", "C", "D", "E", "F", "G"],
+                    CurrentEnergyRating: ["A", "B", "C", "D", "E", "F", "G", "INVALID"],
                     FuelPovertyRateLower: 0,
                     FuelPovertyRateUpper: 100,
                     IncomeDeprivationIndex: "Income Deprivation Domain",
@@ -4666,10 +4666,10 @@
                     RoofEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
                     LightingEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
                     HeatingEnergyEfficiency: ["Very Poor", "Poor", "Average", "Good", "Very Good", ""],
-                    Tenure: ["owner-occupied", "rented(private)", "rented(social)", ""],
+                    Tenure: ["owner-occupied", "rented(private)", "rented(social)","unknown", ""],
                     MainsGasFlag: ["Y", "N", ""],
-                    CurrentEnergyConsumptionLower: 0,
-                    CurrentEnergyConsumptionUpper: 500
+                    CurrentEnergyConsumptionLower: -10000,
+                    CurrentEnergyConsumptionUpper: 312274
                 };
                 function e(o, n) {
                     typeof o != "number" && (Array.isArray(n) ? t[o] = [...new Set(n)] : t[o] = n)
@@ -4703,7 +4703,6 @@
                     payload['la_select_status'] = true;
                     payload['local_authority_label'] = t.LocalAuthorityLabels;
                 }
-                debugger;
                 if ( mode === 'reset') {
                     last_applied_filter = JSON.parse(JSON.stringify(t));
                     console.log('====== CHART API RESET ======');
