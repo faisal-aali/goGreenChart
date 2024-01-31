@@ -4785,6 +4785,7 @@
                             }
                             break;
                         case 'CurrentEnergyConsumptionLower':
+                            debugger;
                             if (last_applied_filter && last_applied_filter[key] === t[key]
                                 && last_applied_filter['CurrentEnergyConsumptionUpper'] === t['CurrentEnergyConsumptionUpper']) {
                                 return
