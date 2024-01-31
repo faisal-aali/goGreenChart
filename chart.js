@@ -4696,7 +4696,6 @@
                 // Rename keys
                 const keys = Object.keys(t);
                 if ( mode === 'reset') {
-                    last_applied_filter = null;
                     console.log('====== CHART API RESET ======');
                     return t.LocalAuthorityLabels = r,
                         (await fetch(`${Br}/chart`, {
@@ -7101,8 +7100,8 @@
                         }
                     ;
                     return [q(t.querySelector(A["filters-reset-button"]), "click", async()=>{
-                        debugger;
                         if(window.location.pathname !== '/profile-creation') {
+                            last_applied_filter = null;
                             await NN('reset');
                         } else {
                             last_applied_filter = null;
