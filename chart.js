@@ -4711,7 +4711,6 @@
                 }
 
                 let payload = {};
-                debugger;
                 if (t.LocalAuthorityLabels.length === 296 || !t.LocalAuthorityLabels.length) {
                     payload['la_select_status'] = false;
                     payload['local_authority_label'] = null;
@@ -7103,10 +7102,10 @@
                     ;
                     return [q(t.querySelector(A["filters-reset-button"]), "click", async()=>{
                         if(window.location.pathname !== '/profile-creation') {
-                            last_applied_filter = null;
+                            // last_applied_filter = null;
                             await NN('reset');
                         } else {
-                            last_applied_filter = null;
+                            // last_applied_filter = null;
                             await NN('apply');
                         }
                     }
